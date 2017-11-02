@@ -1,0 +1,20 @@
+#include "LoginWidget.h"
+#include "ui_widget.h"
+
+LoginWidget::LoginWidget(QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::LoginWidget)
+{
+    ui->setupUi(this);
+}
+
+LoginWidget::~LoginWidget()
+{
+    delete ui;
+}
+
+void LoginWidget::on_pushButton_signup_clicked()
+{
+
+}
+
