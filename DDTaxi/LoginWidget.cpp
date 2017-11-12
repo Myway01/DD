@@ -26,10 +26,14 @@ int LoginWidget::checkIn(const QString &username, const QString &password){
     //query.exec(sql);
     if (!query.next()){
         this->ui->label_error->setText("用户名不存在！");
+        this->ui->lineEdit_username->setFocus();
+        this->ui->lineEdit_username->selectAll();
         return 1;
     }
     else if (query.value(0).toString() != password){
         this->ui->label_error->setText("密码错误，请重新输入！");
+        this->ui->lineEdit_password->setFocus();
+        this->ui->lineEdit_password->selectAll();
         return 2;
     }
     else

@@ -18,7 +18,7 @@ void MainWidget::showWidget(QWidget *w){
 MainWidget::MainWidget(QWidget *parent) : QWidget(parent)
 {
     lay = new QGridLayout(this);
-    lgw = new LoginWidget();
+    lgw = new LoginWidget(this);
     lay->setMargin(0);
     this->setWindowIcon(QIcon(":/new/icon/car.png"));
     showWidget(lgw);
@@ -33,7 +33,7 @@ int MainWidget::login_call(){
 
 int MainWidget::login_signup(){
     //lgw->hide();
-    suw = new SignupWidget();
+    suw = new SignupWidget(this);
     showWidget(suw);
     return 0;
 }
