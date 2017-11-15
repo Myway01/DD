@@ -2,46 +2,52 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>百度地图API</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <style type="text/css">
-        html {
-            height: 100%
-        }
-
-        body {
+        body, html {
+            width: 100%;
             height: 100%;
-            margin: 0px;
-            padding: 0px
+            overflow: hidden;
+            margin: 0;
+            font-family: "微软雅黑";
         }
 
-        #milkMap {
-            height: 400px;
-            width: 600px;
-            border: 1px solid blue;
+        #map1_container, #map2_container {
+            width: 100%;
+            height: 50%;
+            float: left;
+            overflow: hidden;
+            margin: 0;
+        }
+
+        #allmap1 {
+            margin: 0 0 3px;
+            height: 100%;
+        }
+
+        #allmap2 {
+            margin: 3px 0 0;
+            height: 100%;
         }
     </style>
-    <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.1&services=false"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=4HMtpYtGvFARVStMyHqjsPy3sNN4FhRq"></script>
+    <title>同时加载两个地图</title>
 </head>
 <body>
-    <div id="milkMap" style="float:left;"></div>
-    <div style="float:right;width:400px;">
-        <p>开启滚轮缩放</p>
-        <p>关闭双击放大</p>
-        <p>开启键盘操作</p>
-        <p>说明:键盘的上、下、左、右键可连续移动地图。同时按下其中两个键可使地图进行对角移动。PgUp、PgDn、Home和End键会使地图平移其1/2的大小。+、-键会使地图放大或缩小一级。</p>
-    </div>
+    <div id="map1_container"><div id="allmap1"></div></div>
+    <div id="map2_container"><div id="allmap2"></div></div>
 </body>
-<script type="text/javascript">
-    var map = new BMap.Map("milkMap");          // 创建地图实例
-    var point = new BMap.Point(116.404, 39.915);  // 创建点坐标
-    map.centerAndZoom(point, 18);                 // 初始化地图，设置中心点坐标和地图级别
-
-    map.setMapType(BMAP_PERSPECTIVE_MAP);     //修改地图类型为3D地图
-    map.setCurrentCity("北京市");  //设置当前城市
-
-    map.enableScrollWheelZoom();        //开启滚轮缩放功能
-    map.disableDoubleClickZoom();       //关闭双击放大功能
-
-    map.enableKeyboard();               //开启键盘操作功能
-</script>
 </html>
+<script type="text/javascript">
+	//百度地图API功能
+	//加载第一张地图
+	var map1 = new BMap.Map("allmap1");            // 创建Map实例
+    var point1 = new BMap.Point(116.404, 39.915);
+    map1.centerAndZoom(point1,15);
+    map1.enableScrollWheelZoom();                  //启用滚轮放大缩小
+	//加载第二张地图
+	var map2 = new BMap.Map("allmap2");            // 创建Map实例
+    var point2 = new BMap.Point(116.404, 39.915);
+    map2.centerAndZoom(point2,15);
+    map2.enableScrollWheelZoom();                  //启用滚轮放大缩小
+</script>
