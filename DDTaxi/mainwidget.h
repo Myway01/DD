@@ -5,6 +5,7 @@
 #include <QGridLayout>
 #include "LoginWidget.h"
 #include "SignupWidget.h"
+#include "CallWidget.h"
 
 class MainWidget : public QWidget
 {
@@ -13,12 +14,13 @@ class MainWidget : public QWidget
 private:
     QGridLayout *lay;
     LoginWidget *lgw;
-    SignupWidget * suw;
+    SignupWidget *suw;
+    CallWidget *caw;
 
     void showWidget(QWidget *);
 
 public:
-    explicit MainWidget(QWidget *parent = nullptr);
+    explicit MainWidget(QWidget *parent = 0);
 
 signals:
 

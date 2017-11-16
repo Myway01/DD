@@ -1,8 +1,7 @@
 #ifndef MYSQLAPI_H
 #define MYSQLAPI_H
 
-#include <mysql.h>  //°üº¬MySQLËùĞèÒªµÄÍ·ÎÄ¼ş
-#include <WinSock2.h>
+#include <mysql.h>  //åŒ…å«MySQLæ‰€éœ€è¦çš„å¤´æ–‡ä»¶
 #include <string>
 
 using std::string;

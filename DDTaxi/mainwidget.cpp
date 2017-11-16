@@ -8,7 +8,6 @@ void MainWidget::showWidget(QWidget *w){
         lay->removeWidget(p);
         p->hide();
     }
-    this->resize(w->width(), w->height());
     this->setSizePolicy(w->sizePolicy());
     this->setMaximumSize(w->maximumSize());
     this->setMinimumSize(w->minimumSize());
@@ -27,7 +26,9 @@ MainWidget::MainWidget(QWidget *parent) : QWidget(parent)
 }
 
 int MainWidget::login_call(){
-    qDebug() << "login_call";
+    caw = new CallWidget(this);
+    //lgw->hide();
+    showWidget(caw);
     return 0;
 }
 

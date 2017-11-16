@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql
+QT       += core gui sql webkitwidgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -27,16 +27,21 @@ SOURCES += \
         main.cpp \
     LoginWidget.cpp \
     MainWidget.cpp \
-    SignupWidget.cpp
+    SignupWidget.cpp \
+    CallWidget.cpp
 
 HEADERS += \
     LoginWidget.h \
     MainWidget.h \
-    SignupWidget.h
+    SignupWidget.h \
+    CallWidget.h
 
 FORMS += \
     LoginWidget.ui \
-    SignupWidget.ui
+    SignupWidget.ui \
+    CallWidget.ui
 
 RESOURCES += \
     ddrsc.qrc
+
+DISTFILES +=

@@ -1,0 +1,12 @@
+INPUT(
+./debug\main.o
+./debug\LoginWidget.o
+./debug\MainWidget.o
+./debug\SignupWidget.o
+./debug\CallWidget.o
+./debug\qrc_ddrsc.o
+./debug\moc_LoginWidget.o
+./debug\moc_MainWidget.o
+./debug\moc_SignupWidget.o
+./debug\moc_CallWidget.o
+);

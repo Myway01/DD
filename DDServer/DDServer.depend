@@ -1,0 +1,70 @@
+# depslib dependency file v1.0
+1510844412 source:/home/my-way/桌面/pro/DDServer/src/main.cpp
+	"MySqlAPI.h"
+	<iostream>
+
+1510842772 /home/my-way/桌面/pro/DDServer/include/MySqlAPI.h
+	<mysql.h>
+	<string>
+
+1499928932 /home/my-way/mysqlconnector/mysql-connector-c-6.1.11-linux-glibc2.12-i686/include/mysql.h
+	<sys/types.h>
+	<windows.h>
+	<winsock2.h>
+	"mysql_version.h"
+	"mysql_com.h"
+	"mysql_time.h"
+	"my_list.h"
+	"mysql/client_plugin.h"
+	"typelib.h"
+	"my_alloc.h"
+
+1499940652 /home/my-way/mysqlconnector/mysql-connector-c-6.1.11-linux-glibc2.12-i686/include/mysql_version.h
+	<custom_conf.h>
+
+1499928932 /home/my-way/mysqlconnector/mysql-connector-c-6.1.11-linux-glibc2.12-i686/include/mysql_com.h
+	"binary_log_types.h"
+	"my_command.h"
+
+1499928932 /home/my-way/mysqlconnector/mysql-connector-c-6.1.11-linux-glibc2.12-i686/include/binary_log_types.h
+
+1499928932 /home/my-way/mysqlconnector/mysql-connector-c-6.1.11-linux-glibc2.12-i686/include/my_command.h
+
+1499928932 /home/my-way/mysqlconnector/mysql-connector-c-6.1.11-linux-glibc2.12-i686/include/mysql_time.h
+
+1499928932 /home/my-way/mysqlconnector/mysql-connector-c-6.1.11-linux-glibc2.12-i686/include/my_list.h
+
+1499928932 /home/my-way/mysqlconnector/mysql-connector-c-6.1.11-linux-glibc2.12-i686/include/mysql/client_plugin.h
+	<stdarg.h>
+	<stdlib.h>
+	"plugin_auth_common.h"
+
+1499928932 /home/my-way/mysqlconnector/mysql-connector-c-6.1.11-linux-glibc2.12-i686/include/mysql/plugin_auth_common.h
+	<windows.h>
+
+1499928932 /home/my-way/mysqlconnector/mysql-connector-c-6.1.11-linux-glibc2.12-i686/include/typelib.h
+	"my_alloc.h"
+
+1499928932 /home/my-way/mysqlconnector/mysql-connector-c-6.1.11-linux-glibc2.12-i686/include/my_alloc.h
+	"mysql/psi/psi_memory.h"
+
+1499928932 /home/my-way/mysqlconnector/mysql-connector-c-6.1.11-linux-glibc2.12-i686/include/mysql/psi/psi_memory.h
+	"psi_base.h"
+
+1499928932 /home/my-way/mysqlconnector/mysql-connector-c-6.1.11-linux-glibc2.12-i686/include/mysql/psi/psi_base.h
+
+1510837509 source:/home/my-way/桌面/pro/DDServer/src/MySqlAPI.cpp
+	"MySqlAPI.h"
+	<stdio.h>
+	<stdlib.h>
+
+1510844204 source:/home/my-way/桌面/pro/DDServer/src/TcpServer.cpp
+	"TcpServer.h"
+
+1510844313 /home/my-way/桌面/pro/DDServer/include/TcpServer.h
+	<unistd.h>
+	<sys/types.h>
+	<sys/socket.h>
+	<netinet/in.h>
+	<arpa/inet.h>
+

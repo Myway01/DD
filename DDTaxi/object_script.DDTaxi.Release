@@ -1,0 +1,12 @@
+INPUT(
+./release\main.o
+./release\LoginWidget.o
+./release\MainWidget.o
+./release\SignupWidget.o
+./release\CallWidget.o
+./release\qrc_ddrsc.o
+./release\moc_LoginWidget.o
+./release\moc_MainWidget.o
+./release\moc_SignupWidget.o
+./release\moc_CallWidget.o
+);
