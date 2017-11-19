@@ -14,7 +14,7 @@ TcpServer::~TcpServer()
 
 bool TcpServer::Listen(){
     sockfd = socket(PF_INET, SOCK_STREAM, 0);
-    if(sockfd = -1){
+    if(sockfd == -1){
         state = 1;
         return false;
     }
@@ -26,6 +26,7 @@ bool TcpServer::Listen(){
         state = 3;
         return false;
     }
+    state = 0;
     return true;
 }
 
@@ -38,19 +39,11 @@ bool TcpServer::Accept(){
     return true;
 }
 
-bool TcpServer::Recv(char* recvbuf, int len){
-    int ret = 0;
-        ret = read(connfd, recvbuf, len);
-        if (ret == 0){
-            state = 4;
-            return false;
-        }
-        else if (ret < 0){
-            state = 5;
-            return false;
-        }
+ssize_t TcpServer::Recv(char* recvbuf, size_t maxlen){
+    return readline(connfd, recvbuf, maxlen);
 }
 
 bool TcpServer::Send(char* sendbuf, int len){
     write(connfd, sendbuf, len);
+    return true;
 }

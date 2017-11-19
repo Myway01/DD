@@ -38,9 +38,11 @@
 		</Compiler>
 		<Unit filename="include/MySqlAPI.h" />
 		<Unit filename="include/TcpServer.h" />
+		<Unit filename="include/socketAPI.h" />
 		<Unit filename="src/MySqlAPI.cpp" />
 		<Unit filename="src/TcpServer.cpp" />
 		<Unit filename="src/main.cpp" />
+		<Unit filename="src/socketAPI.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

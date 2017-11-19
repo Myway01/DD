@@ -1,10 +1,13 @@
 # depslib dependency file v1.0
-1510844412 source:/home/my-way/桌面/pro/DDServer/src/main.cpp
+1511098387 source:/home/my-way/桌面/pro/DDServer/src/main.cpp
 	"MySqlAPI.h"
+	"TcpServer.h"
 	<iostream>
+	<cstring>
+	<cstdio>
 
-1510842772 /home/my-way/桌面/pro/DDServer/include/MySqlAPI.h
-	<mysql.h>
+1511074784 /home/my-way/桌面/pro/DDServer/include/MySqlAPI.h
+	<mysql/mysql.h>
 	<string>
 
 1499928932 /home/my-way/mysqlconnector/mysql-connector-c-6.1.11-linux-glibc2.12-i686/include/mysql.h
@@ -58,13 +61,21 @@
 	<stdio.h>
 	<stdlib.h>
 
-1510844204 source:/home/my-way/桌面/pro/DDServer/src/TcpServer.cpp
+1511085816 source:/home/my-way/桌面/pro/DDServer/src/TcpServer.cpp
 	"TcpServer.h"
 
-1510844313 /home/my-way/桌面/pro/DDServer/include/TcpServer.h
+1511085138 /home/my-way/桌面/pro/DDServer/include/TcpServer.h
+	"socketAPI.h"
+
+1511085072 /home/my-way/桌面/pro/DDServer/include/socketAPI.h
 	<unistd.h>
 	<sys/types.h>
 	<sys/socket.h>
 	<netinet/in.h>
 	<arpa/inet.h>
+	<errno.h>
+	<stdlib.h>
+
+1511102120 source:/home/my-way/桌面/pro/DDServer/src/socketAPI.cpp
+	"socketAPI.h"
 

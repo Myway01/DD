@@ -1,11 +1,7 @@
 #ifndef TCPSERVER_H
 #define TCPSERVER_H
 
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
+#include "socketAPI.h"
 
 class TcpServer
 {
@@ -13,10 +9,10 @@ class TcpServer
         TcpServer(unsigned short port, char *ip);
         virtual ~TcpServer();
 
-        int state = 0;
+        int state;
         bool Listen();
         bool Accept();
-        bool Recv(char *recvbuf, int len);
+        ssize_t Recv(char *recvbuf, size_t len);
         bool Send(char *sendbuf, int len);
 
     protected:

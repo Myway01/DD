@@ -1,7 +1,7 @@
 #ifndef MYSQLAPI_H
 #define MYSQLAPI_H
 
-#include <mysql.h>  //包含MySQL所需要的头文件
+#include <mysql/mysql.h> //包含MySQL所需要的头文件
 #include <string>
 
 using std::string;
