@@ -1,0 +1,24 @@
+# depslib dependency file v1.0
+1511539090 source:d:\codeblocks\projects\sockettest\main.cpp
+	<winsock2.h>
+	<stdio.h>
+
+1511611307 source:d:\codeblocks\projects\sockettest\src\main.cpp
+	<winsock2.h>
+	<stdio.h>
+	"TcpClient.h"
+	<iostream>
+
+1511604256 source:d:\codeblocks\projects\sockettest\src\socketapi.cpp
+	"socketAPI.h"
+
+1511611351 d:\codeblocks\projects\sockettest\include\socketapi.h
+	<winsock.h>
+	<basetsd.h>
+
+1511610352 source:d:\codeblocks\projects\sockettest\src\tcpclient.cpp
+	"TcpClient.h"
+
+1511610352 d:\codeblocks\projects\sockettest\include\tcpclient.h
+	"socketAPI.h"
+

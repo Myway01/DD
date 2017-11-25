@@ -19,8 +19,8 @@ int main(){
     cout << std::endl << s;
     db->close();
     */
-
-    TcpServer *s = new TcpServer(8001, "192.168.246.128");
+/*
+    TcpServer *s = new TcpServer("192.168.246.128", 8001);
     if (!s->Listen())
         cout << "listen fialed\n";
     if (!s->Accept())
@@ -31,9 +31,13 @@ int main(){
     if (s->Recv(recvbuf, 1024) < 0)
         cout << "recv failed\n";
     else
-        cout << recvbuf;
+        cout << recvbuf << '\n';
     memset(recvbuf, 0, 1024);
-        }/**/
-    cout<<"dfhsjk";
+        }*/
+    TcpServer *s = new TcpServer("192.168.246.128", 8002);
+    if (s->state == 0)
+        s->Serve();
+    int n;
+    std::cin >> n;
     return 0;
 }
