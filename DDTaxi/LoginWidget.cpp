@@ -1,6 +1,8 @@
 #include "LoginWidget.h"
 #include "ui_LoginWidget.h"
 #include <QSqlQuery>
+#include <QCryptographicHash>
+#include <QDebug>
 
 LoginWidget::LoginWidget(QWidget *parent) :
     QWidget(parent),
@@ -15,7 +17,11 @@ LoginWidget::~LoginWidget()
     delete ui;
 }
 
-int LoginWidget::checkIn(const QString &username, const QString &password){
+int LoginWidget::checkIn(const QString &username, const QString &passwor){
+    QString md5;
+    md5.append((QCryptographicHash::hash(passwor.toLatin1(), QCryptographicHash::Md5)).toHex());
+    qDebug() << md5;
+    QString password = md5;
     //QString sql = "select password from t001 where username = '" + username + "'";
     QString sql = "select password from t001 where username = :username";
     //防止SQL注入攻击

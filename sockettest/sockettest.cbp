@@ -36,6 +36,7 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="include/DDStructs.h" />
 		<Unit filename="include/TcpClient.h" />
 		<Unit filename="include/socketAPI.h" />
 		<Unit filename="src/TcpClient.cpp" />

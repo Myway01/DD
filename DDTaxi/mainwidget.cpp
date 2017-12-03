@@ -18,23 +18,26 @@ MainWidget::MainWidget(QWidget *parent) : QWidget(parent)
 {
     lay = new QGridLayout(this);
     lgw = new LoginWidget(this);
+    caw = new CallWidget(this);
     lay->setMargin(0);
     this->setWindowIcon(QIcon(":/new/icon/car.png"));
     showWidget(lgw);
     connect(lgw, SIGNAL(login()), this, SLOT(login_call()));
     connect(lgw, SIGNAL(signup()), this, SLOT(login_signup()));
+    connect(suw, SIGNAL(ret()), this, SLOT(signup_login()));
 }
 
 int MainWidget::login_call(){
-    caw = new CallWidget(this);
-    //lgw->hide();
     showWidget(caw);
     return 0;
 }
 
 int MainWidget::login_signup(){
-    //lgw->hide();
     suw = new SignupWidget(this);
     showWidget(suw);
     return 0;
+}
+
+int MainWidget::signup_login(){
+
 }

@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_MainWidget_t {
-    QByteArrayData data[4];
-    char stringdata[36];
+    QByteArrayData data[5];
+    char stringdata[49];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,10 +32,12 @@ static const qt_meta_stringdata_MainWidget_t qt_meta_stringdata_MainWidget = {
 QT_MOC_LITERAL(0, 0, 10), // "MainWidget"
 QT_MOC_LITERAL(1, 11, 10), // "login_call"
 QT_MOC_LITERAL(2, 22, 0), // ""
-QT_MOC_LITERAL(3, 23, 12) // "login_signup"
+QT_MOC_LITERAL(3, 23, 12), // "login_signup"
+QT_MOC_LITERAL(4, 36, 12) // "signup_login"
 
     },
-    "MainWidget\0login_call\0\0login_signup"
+    "MainWidget\0login_call\0\0login_signup\0"
+    "signup_login"
 };
 #undef QT_MOC_LITERAL
 
@@ -45,7 +47,7 @@ static const uint qt_meta_data_MainWidget[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       2,   14, // methods
+       3,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -53,10 +55,12 @@ static const uint qt_meta_data_MainWidget[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   24,    2, 0x0a /* Public */,
-       3,    0,   25,    2, 0x0a /* Public */,
+       1,    0,   29,    2, 0x0a /* Public */,
+       3,    0,   30,    2, 0x0a /* Public */,
+       4,    0,   31,    2, 0x0a /* Public */,
 
  // slots: parameters
+    QMetaType::Int,
     QMetaType::Int,
     QMetaType::Int,
 
@@ -71,6 +75,8 @@ void MainWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 0: { int _r = _t->login_call();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
         case 1: { int _r = _t->login_signup();
+            if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
+        case 2: { int _r = _t->signup_login();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
         default: ;
         }
@@ -102,13 +108,13 @@ int MainWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
+        if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 3;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 2)
+        if (_id < 3)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 2;
+        _id -= 3;
     }
     return _id;
 }

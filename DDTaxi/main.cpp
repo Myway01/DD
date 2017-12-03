@@ -1,8 +1,8 @@
-#include "MainWidget.h"
 #include <QApplication>
 #include <QSqlDatabase>
 #include <QDebug>
 #include <QSqlError>
+#include "MainWidget.h"
 
 int main(int argc, char *argv[])
 {
@@ -19,7 +19,6 @@ int main(int argc, char *argv[])
     }
     else
         qDebug() << "true";
-
 
     MainWidget mw;
     mw.show();

@@ -4,6 +4,7 @@ INPUT(
 ./release\MainWidget.o
 ./release\SignupWidget.o
 ./release\CallWidget.o
+./release\socketAPI.o
 ./release\qrc_ddrsc.o
 ./release\moc_LoginWidget.o
 ./release\moc_MainWidget.o

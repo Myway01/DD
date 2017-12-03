@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql webkitwidgets
+QT       += core gui sql webkitwidgets network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -28,13 +28,15 @@ SOURCES += \
     LoginWidget.cpp \
     MainWidget.cpp \
     SignupWidget.cpp \
-    CallWidget.cpp
+    CallWidget.cpp \
+    socketAPI.cpp
 
 HEADERS += \
     LoginWidget.h \
     MainWidget.h \
     SignupWidget.h \
-    CallWidget.h
+    CallWidget.h \
+    socketAPI.h
 
 FORMS += \
     LoginWidget.ui \

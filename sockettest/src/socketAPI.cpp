@@ -64,7 +64,6 @@ SSIZE_T recvline(SOCKET sockfd, char *buf, SIZE_T maxlen){
 			if (bufp[i] == '\r' && bufp[i+1] == '\n')
 			{
 				ret = recvn(sockfd, bufp, i+2);
-				bufp[i+1] = bufp[i] = 0;
 				if (ret != i+2)
 					exit(EXIT_FAILURE);
 

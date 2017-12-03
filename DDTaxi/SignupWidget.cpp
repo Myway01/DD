@@ -12,3 +12,8 @@ SignupWidget::~SignupWidget()
 {
     delete ui;
 }
+
+void SignupWidget::on_pushButton_ret_clicked()
+{
+
+}

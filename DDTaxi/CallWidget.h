@@ -2,6 +2,8 @@
 #define CALLWIDGET_H
 
 #include <QWidget>
+#include <QWebFrame>
+#include <QWebElement>
 
 namespace Ui {
 class CallWidget;
@@ -19,6 +21,10 @@ private:
 signals:
 
 public slots:
+    void populateJavaScriptWindowObject();
+
+private slots:
+    void on_pushButton_call_clicked();
 };
 
 #endif // CALLWIDGET_H

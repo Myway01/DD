@@ -27,6 +27,7 @@ signals:
 public slots:
     int login_call();
     int login_signup();
+    int signup_login();
 
 };
 

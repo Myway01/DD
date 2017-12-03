@@ -3,6 +3,6 @@
         <file>car.png</file>
     </qresource>
     <qresource prefix="/new/map">
-        <file alias="test">test-4.html</file>
+        <file>test-4.html</file>
     </qresource>
 </RCC>

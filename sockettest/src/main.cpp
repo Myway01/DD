@@ -21,17 +21,21 @@ int main()
         return -1;
     }
     cout << "lianjiechonggong\n";
+    //char aa[] = "helloÄãºÃhello";
     int ret;
+    char type = 1;
+    ret = c->Send(&type, 1, 3);
     ret = c->Send("hello--cli", 11, 3);
     if (ret == -2)
         cout << "sendchaoshi\n";
+    Sleep(10000);
     char buf[100] = {0};
     ret = c->Recv(buf, 100, 3);
     if (ret == -2)
         cout << "recvchaoshi\n";
     else
         cout << buf;
-
+    //cout << ret;
     WinsockEnd();
     return 0;
 }

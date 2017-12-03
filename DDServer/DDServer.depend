@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1511598412 source:/home/my-way/桌面/pro/DDServer/src/main.cpp
+1512220626 source:/home/my-way/桌面/pro/DDServer/src/main.cpp
 	"MySqlAPI.h"
 	"TcpServer.h"
 	<iostream>
@@ -61,12 +61,13 @@
 	<stdio.h>
 	<stdlib.h>
 
-1511598773 source:/home/my-way/桌面/pro/DDServer/src/TcpServer.cpp
+1512221803 source:/home/my-way/桌面/pro/DDServer/src/TcpServer.cpp
 	"TcpServer.h"
 	<string.h>
+	"ServerProc.h"
 	<iostream>
 
-1511598342 /home/my-way/桌面/pro/DDServer/include/TcpServer.h
+1512220626 /home/my-way/桌面/pro/DDServer/include/TcpServer.h
 	<pthread.h>
 	"socketAPI.h"
 
@@ -81,7 +82,15 @@
 	<stdlib.h>
 	<fcntl.h>
 
-1511599463 source:/home/my-way/桌面/pro/DDServer/src/socketAPI.cpp
+1512223702 source:/home/my-way/桌面/pro/DDServer/src/socketAPI.cpp
 	"socketAPI.h"
 	<string.h>
+
+1512221015 source:/home/my-way/桌面/pro/DDServer/src/ServerProc.cpp
+	"ServerProc.h"
+	<string.h>
+	"socketAPI.h"
+	<iostream>
+
+1512220626 /home/my-way/桌面/pro/DDServer/include/ServerProc.h
 
