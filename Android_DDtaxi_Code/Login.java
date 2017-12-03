@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+@SuppressWarnings("unused")
 public class Login extends Activity {
 
 	private Button login, register;
