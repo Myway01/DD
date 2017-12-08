@@ -255,7 +255,7 @@ public:
         label_error->setText(QString());
         label_tel->setText(QApplication::translate("SignupWidget", "\346\211\213\346\234\272\345\217\267\347\240\201", 0));
         label_psw->setText(QApplication::translate("SignupWidget", "\347\231\273\345\275\225\345\257\206\347\240\201", 0));
-        label_nickname->setText(QApplication::translate("SignupWidget", "\346\230\265\347\247\260", 0));
+        label_nickname->setText(QApplication::translate("SignupWidget", "\345\247\223\345\220\215", 0));
         label_cpsw->setText(QApplication::translate("SignupWidget", "\347\241\256\350\256\244\345\257\206\347\240\201", 0));
         pushButton_signup->setText(QApplication::translate("SignupWidget", "\346\263\250\345\206\214", 0));
         pushButton_ret->setText(QApplication::translate("SignupWidget", "\350\277\224\345\233\236", 0));

@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql webkitwidgets network
+QT       += core gui sql webenginewidgets network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -29,19 +29,22 @@ SOURCES += \
     MainWidget.cpp \
     SignupWidget.cpp \
     CallWidget.cpp \
-    socketAPI.cpp
+    socketAPI.cpp \
+    ordWidget.cpp
 
 HEADERS += \
     LoginWidget.h \
     MainWidget.h \
     SignupWidget.h \
     CallWidget.h \
-    socketAPI.h
+    socketAPI.h \
+    ordWidget.h
 
 FORMS += \
     LoginWidget.ui \
     SignupWidget.ui \
-    CallWidget.ui
+    CallWidget.ui \
+    ordWidget.ui
 
 RESOURCES += \
     ddrsc.qrc

@@ -5,9 +5,11 @@ INPUT(
 ./debug\SignupWidget.o
 ./debug\CallWidget.o
 ./debug\socketAPI.o
+./debug\ordWidget.o
 ./debug\qrc_ddrsc.o
 ./debug\moc_LoginWidget.o
 ./debug\moc_MainWidget.o
 ./debug\moc_SignupWidget.o
 ./debug\moc_CallWidget.o
+./debug\moc_ordWidget.o
 );

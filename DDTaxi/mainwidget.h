@@ -21,13 +21,14 @@ private:
 
 public:
     explicit MainWidget(QWidget *parent = 0);
+    ~MainWidget();
 
 signals:
 
 public slots:
-    int login_call();
-    int login_signup();
-    int signup_login();
+    int showcaw();
+    int showsuw();
+    int showlgw();
 
 };
 

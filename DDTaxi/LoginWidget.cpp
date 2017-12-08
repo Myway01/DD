@@ -1,4 +1,4 @@
-#include "LoginWidget.h"
+﻿#include "LoginWidget.h"
 #include "ui_LoginWidget.h"
 #include <QSqlQuery>
 #include <QCryptographicHash>

@@ -5,9 +5,11 @@ INPUT(
 ./release\SignupWidget.o
 ./release\CallWidget.o
 ./release\socketAPI.o
+./release\ordWidget.o
 ./release\qrc_ddrsc.o
 ./release\moc_LoginWidget.o
 ./release\moc_MainWidget.o
 ./release\moc_SignupWidget.o
 ./release\moc_CallWidget.o
+./release\moc_ordWidget.o
 );

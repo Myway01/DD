@@ -20,7 +20,7 @@
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_MainWidget_t {
     QByteArrayData data[5];
-    char stringdata[49];
+    char stringdata[36];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -30,14 +30,13 @@ struct qt_meta_stringdata_MainWidget_t {
 static const qt_meta_stringdata_MainWidget_t qt_meta_stringdata_MainWidget = {
     {
 QT_MOC_LITERAL(0, 0, 10), // "MainWidget"
-QT_MOC_LITERAL(1, 11, 10), // "login_call"
-QT_MOC_LITERAL(2, 22, 0), // ""
-QT_MOC_LITERAL(3, 23, 12), // "login_signup"
-QT_MOC_LITERAL(4, 36, 12) // "signup_login"
+QT_MOC_LITERAL(1, 11, 7), // "showcaw"
+QT_MOC_LITERAL(2, 19, 0), // ""
+QT_MOC_LITERAL(3, 20, 7), // "showsuw"
+QT_MOC_LITERAL(4, 28, 7) // "showlgw"
 
     },
-    "MainWidget\0login_call\0\0login_signup\0"
-    "signup_login"
+    "MainWidget\0showcaw\0\0showsuw\0showlgw"
 };
 #undef QT_MOC_LITERAL
 
@@ -72,11 +71,11 @@ void MainWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
     if (_c == QMetaObject::InvokeMetaMethod) {
         MainWidget *_t = static_cast<MainWidget *>(_o);
         switch (_id) {
-        case 0: { int _r = _t->login_call();
+        case 0: { int _r = _t->showcaw();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
-        case 1: { int _r = _t->login_signup();
+        case 1: { int _r = _t->showsuw();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
-        case 2: { int _r = _t->signup_login();
+        case 2: { int _r = _t->showlgw();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
         default: ;
         }
