@@ -18,6 +18,7 @@ void *thread_serve(void* arg){
 	}
 	connfd = *((int *)arg);
 	delete((int *)arg);
+	cout << connfd <<"connect\n";
 
 	while((ret = read_timeout(connfd, 5)) == -2);//如果超时继续读取
     if (ret == -1){
@@ -33,7 +34,8 @@ void *thread_serve(void* arg){
     }
     else{
         switch (type[0]){
-            case 1:proc_test(connfd);break;
+            case 0: proc_test(connfd); break;
+            case 1: proc_login(connfd); break;
         }
     }
 	return NULL;

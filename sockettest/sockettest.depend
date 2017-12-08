@@ -3,13 +3,14 @@
 	<winsock2.h>
 	<stdio.h>
 
-1512221273 source:d:\codeblocks\projects\sockettest\src\main.cpp
+1512660839 source:d:\codeblocks\projects\sockettest\src\main.cpp
 	<winsock2.h>
 	<stdio.h>
 	"TcpClient.h"
+	"DDStructs.h"
 	<iostream>
 
-1511604256 source:d:\codeblocks\projects\sockettest\src\socketapi.cpp
+1512223345 source:d:\codeblocks\projects\sockettest\src\socketapi.cpp
 	"socketAPI.h"
 
 1511611351 d:\codeblocks\projects\sockettest\include\socketapi.h
@@ -21,4 +22,6 @@
 
 1511610352 d:\codeblocks\projects\sockettest\include\tcpclient.h
 	"socketAPI.h"
+
+1512664813 d:\codeblocks\projects\sockettest\include\ddstructs.h
 

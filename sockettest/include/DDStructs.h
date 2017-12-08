@@ -2,8 +2,8 @@
 #define DDSTRUCTS_H_INCLUDED
 
 struct DD_login{
-    char tel[11];
-    char md5[32];
+    char tel[12];
+    char psw[33];
 };
 
 struct DD_signup{

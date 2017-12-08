@@ -37,13 +37,14 @@
 			<Add option="-lmysqlclient" />
 			<Add option="-lpthread" />
 		</Linker>
-		<Unit filename="include/MySqlAPI.h" />
+		<Unit filename="include/MySqlConn.h" />
 		<Unit filename="include/ServerProc.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="include/TcpServer.h" />
 		<Unit filename="include/socketAPI.h" />
-		<Unit filename="src/MySqlAPI.cpp" />
+		<Unit filename="include/socktype.h" />
+		<Unit filename="src/MySqlConn.cpp" />
 		<Unit filename="src/ServerProc.cpp" />
 		<Unit filename="src/TcpServer.cpp" />
 		<Unit filename="src/main.cpp" />
