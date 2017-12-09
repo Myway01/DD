@@ -30,7 +30,7 @@ int main()
     ret = c->Send(&type, 1, 3);
     struct DD_login lg;
     strcpy(lg.tel, "18322303006");
-    strcpy(lg.psw, "123456");
+    strcpy(lg.psw, "12346");
     //ret = c->Send("hello--cli", 11, 3);
     ret = c->Send((char*)&lg, sizeof(DD_login), 3);
     if (ret == -2)
@@ -46,10 +46,13 @@ int main()
         cout << buf;
     //cout << ret;
     if (buf[0] == 0){
-        cout << "false";
-    }
-    else if (buf[0] == 1){
         cout << "true";
+    }
+    else if (buf[0] == -1){
+        cout << "mimacuowu";
+    }
+    else if (buf[0] == -2){
+        cout << "yonghumingcuowu";
     }
     WinsockEnd();
     getchar();

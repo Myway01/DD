@@ -56,10 +56,11 @@ void proc_login(int connfd){
     sprintf(sql, "SELECT psw FROM DDTAXI.CLIENT WHERE tel='%s'", lg.tel);
     db.exec(sql);
     char* psw = db.getSelectRes();//查询到的密码
-    ret = strcmp(psw, lg.psw);
-    char r = 0;//回复数据
-    if (ret == 0)
-        r = 1;
+    if (psw != NULL)
+        ret = ((strcmp(psw, lg.psw) == 0) ? 0 : -1);//0代表成功，-1代表密码错误
+    else
+        ret = -2;//-2代表用户不存在
+    char r = ret;//回复数据
 
     ret = write_timeout(connfd, 5);
     if (ret != 0){

@@ -11,7 +11,7 @@ void *thread_serve(void* arg){
 	int connfd = 0;
 	int ret = 0;
 
-	pthread_detach(pthread_self());
+	//pthread_detach(pthread_self());
 
 	if (arg == NULL){
 		return NULL;
@@ -25,15 +25,15 @@ void *thread_serve(void* arg){
         close(connfd);
         return NULL;
     }
-    char type[3] = {0};//包类型,多出2字节内存内存供readline函数储存结尾标记使用。
-    ret = readline(connfd, type, 3);
+    char type = 0;
+    ret = readline(connfd, &type, 1);
     //cout << ret << "\n";
     if (ret <= 0){
         close(connfd);
         return NULL;
     }
     else{
-        switch (type[0]){
+        switch (type){
             case 0: proc_test(connfd); break;
             case 1: proc_login(connfd); break;
         }
@@ -63,7 +63,7 @@ void TcpServer::Serve(){
         pthread_t tid = 0;
 		int *pCon = new int;
 		*pCon = connfd;
-        //thread_serve((void *)pCon);
-		pthread_create(&tid, NULL, thread_serve, (void *)pCon);
+        thread_serve((void *)pCon);
+		//pthread_create(&tid, NULL, thread_serve, (void *)pCon);
     }
 }

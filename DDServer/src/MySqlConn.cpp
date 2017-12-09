@@ -3,22 +3,21 @@
 MySqlConn::MySqlConn()
 {
     mysql_init(&mysql);
+    res = NULL;
 }
 
 MySqlConn::~MySqlConn()
 {
-    mysql_free_result(res);
+    if (res != NULL){
+        mysql_free_result(res);
+        res = NULL;
+    }
     mysql_close(&mysql);
 }
 
 void MySqlConn::open(char* host, char* user, char* password, char* database, unsigned int port){
 
-    MYSQL*ret = mysql_real_connect(&mysql, host, user, password, database, port, NULL, 0);
-
-    if (ret == NULL){
-        return;
-    }
-    else return;
+    mysql_real_connect(&mysql, host, user, password, database, port, NULL, 0);
 }
 
 void MySqlConn::exec(char* sql){
@@ -28,7 +27,10 @@ void MySqlConn::exec(char* sql){
 void MySqlConn::getSelectRes(int* rows, int* fields){
     int r = 0;
     int f = 0;
-    mysql_free_result(res);
+    if (res != NULL){
+        mysql_free_result(res);
+        res = NULL;
+    }
     res = mysql_store_result(&mysql);
     r = mysql_num_rows(res);
     *rows = r;
@@ -38,17 +40,26 @@ void MySqlConn::getSelectRes(int* rows, int* fields){
 
 void MySqlConn::getSelectRes(int* rows){
     int r = 0;
-    mysql_free_result(res);
+    if (res != NULL){
+        mysql_free_result(res);
+        res = NULL;
+    }
     res = mysql_store_result(&mysql);
     r = mysql_num_rows(res);
     *rows = r;
 }
 
 char* MySqlConn::getSelectRes(){
-    mysql_free_result(res);
+    if (res != NULL){
+        mysql_free_result(res);
+        res = NULL;
+    }
     res = mysql_store_result(&mysql);
     MYSQL_ROW result = mysql_fetch_row(res);
-    return result[0];
+    if (result != NULL)
+        return result[0];
+    else
+        return NULL;
 }
 
 char** MySqlConn::getNextLine(){

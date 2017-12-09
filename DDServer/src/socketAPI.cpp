@@ -56,14 +56,16 @@ ssize_t recv_peek(int sockfd, void *buf, size_t len){
             return ret;
     }
 }
-//为了不在函数里分配内存，减小内存消耗，需要在调用热readline函数时将buf的大小增大2以包含结尾标记。
+
 ssize_t readline(int sockfd, char *buf, size_t maxlen){
     ssize_t ret;
 	ssize_t nread;
-	char *bufp = buf;
-	size_t nleft = maxlen;
+	size_t nleft = maxlen + 2;
+	char bufp[maxlen+2];
+
 	while (1)
 	{
+        memset(bufp, 0, maxlen+2);
 		if ((ret = recv_peek(sockfd, bufp, nleft)) < 0)
 			return ret;
 		else if (ret == 0)
@@ -75,11 +77,13 @@ ssize_t readline(int sockfd, char *buf, size_t maxlen){
 		{
 			if (bufp[i] == '\r' && bufp[i+1] == '\n')
 			{
-				ret = readn(sockfd, bufp, i+2);
-				if (ret != i+2)
+				ret = readn(sockfd, buf, i);
+				if (ret != i)
 					exit(EXIT_FAILURE);
+                else if (readn(sockfd, bufp, 2) != 2)
+                    exit(EXIT_FAILURE);
 
-				return ret-2;
+				return ret;
 			}
 		}
 
@@ -87,11 +91,11 @@ ssize_t readline(int sockfd, char *buf, size_t maxlen){
 			exit(EXIT_FAILURE);
 
 		nleft -= nread;
-		ret = readn(sockfd, bufp, nread);
+		ret = readn(sockfd, buf, nread);
 		if (ret != nread)
 			exit(EXIT_FAILURE);
 
-		bufp += nread;
+		buf += nread;
 	}
 	return -1;
 }
