@@ -2,6 +2,7 @@
 #define SERVERPROC_H_INCLUDED
 
 void proc_test(int connfd);
-void proc_login(int connfd);
+void proc_login_cli(int connfd);
+void proc_signup_cli(int connfd);
 
 #endif // SERVERPROC_H_INCLUDED

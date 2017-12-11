@@ -1,5 +1,8 @@
 #include "socketAPI.h"
 
+#include <iostream>
+using std::cout;
+
 SSIZE_T recvn(SOCKET fd, char *buf, SIZE_T num){
     char *bufp = buf;
     SIZE_T nleft = num;
@@ -46,41 +49,44 @@ SSIZE_T recv_peek(SOCKET sockfd, char *buf, SIZE_T len){
 }
 
 SSIZE_T recvline(SOCKET sockfd, char *buf, SIZE_T maxlen){
-    SSIZE_T ret;
-	SSIZE_T nrecvd;
-	char *bufp = buf;
-	SIZE_T nleft = maxlen;
-	while (1)
-	{
-		if ((ret = recv_peek(sockfd, bufp, nleft)) < 0)
+	SSIZE_T ret;
+	SIZE_T nrecv;
+	SIZE_T recvnum = 0;
+	SIZE_T nleft = maxlen+1;
+	char bufr[maxlen+1] = {0};
+	char *bufp = bufr;
+	while (1){
+		ret = recv_peek(sockfd, bufp, nleft);
+		if (ret < 0)
 			return ret;
 		else if (ret == 0)
-			return ret;
+			return ret + recvnum;
 
-		nrecvd = ret;
+		nrecv = ret;
 		int i;
-		for (i = 0; i < nrecvd; i++)
-		{
-			if (bufp[i] == '\r' && bufp[i+1] == '\n')
-			{
-				ret = recvn(sockfd, bufp, i+2);
-				if (ret != i+2)
-					exit(EXIT_FAILURE);
+		for (i=0; i<nrecv; i++){
+			if (bufp[i] == '\r'){
+				ret = recvn(sockfd, bufp, i+1);
+				if (ret != i+1)
+					return -1;
 
-				return ret-2;
+                memcpy(buf, bufr, ret + recvnum - 1);
+				return ret + recvnum -1;
 			}
 		}
 
-		if (nrecvd > nleft)
-			exit(EXIT_FAILURE);
+		if (nrecv > nleft)
+			return -1;
 
-		nleft -= nrecvd;
-		ret = recvn(sockfd, bufp, nrecvd);
-		if (ret != nrecvd)
-			exit(EXIT_FAILURE);
+		nleft -= nrecv;
+		ret = recvn(sockfd, bufp, nrecv);
+		if (ret != nrecv)
+			return -1;
 
-		bufp += nrecvd;
+        recvnum += nrecv;
+		bufp += nrecv;
 	}
+
 	return -1;
 }
 
@@ -91,8 +97,8 @@ SSIZE_T sendline(SOCKET sockfd, char *buf, SIZE_T len){
         return ret;
     if (ret != len)
         exit(EXIT_FAILURE);
-    char bufend[2] = {'\r', '\n'};
-    while(sendn(sockfd, bufend, 2) != 2);
+    char bufend[1] = {'\r'};
+    while(sendn(sockfd, bufend, 1) != 1);
     return ret;
 }
 

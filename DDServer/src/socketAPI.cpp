@@ -58,45 +58,44 @@ ssize_t recv_peek(int sockfd, void *buf, size_t len){
 }
 
 ssize_t readline(int sockfd, char *buf, size_t maxlen){
-    ssize_t ret;
-	ssize_t nread;
-	size_t nleft = maxlen + 2;
-	char bufp[maxlen+2];
-
-	while (1)
-	{
-        memset(bufp, 0, maxlen+2);
-		if ((ret = recv_peek(sockfd, bufp, nleft)) < 0)
+	ssize_t ret;
+	size_t nread;
+	size_t readnum = 0;
+	size_t nleft = maxlen+1;
+	char bufr[maxlen+1] = {0};
+	char *bufp = bufr;
+	while (1){
+		ret = recv_peek(sockfd, bufp, nleft);
+		if (ret < 0)
 			return ret;
 		else if (ret == 0)
-			return ret;
+			return ret + readnum;
 
 		nread = ret;
 		int i;
-		for (i = 0; i < nread; i++)
-		{
-			if (bufp[i] == '\r' && bufp[i+1] == '\n')
-			{
-				ret = readn(sockfd, buf, i);
-				if (ret != i)
-					exit(EXIT_FAILURE);
-                else if (readn(sockfd, bufp, 2) != 2)
-                    exit(EXIT_FAILURE);
+		for (i=0; i<nread; i++){
+			if (bufp[i] == '\r'){
+				ret = readn(sockfd, bufp, i+1);
+				if (ret != i+1)
+					return -1;
 
-				return ret;
+                memcpy(buf, bufr, ret + readnum - 1);
+				return ret + readnum -1;
 			}
 		}
 
 		if (nread > nleft)
-			exit(EXIT_FAILURE);
+			return -1;
 
 		nleft -= nread;
-		ret = readn(sockfd, buf, nread);
+		ret = readn(sockfd, bufp, nread);
 		if (ret != nread)
-			exit(EXIT_FAILURE);
+			return -1;
 
-		buf += nread;
+        readnum += nread;
+		bufp += nread;
 	}
+
 	return -1;
 }
 
@@ -107,8 +106,8 @@ ssize_t writeline(int sockfd, char *buf, size_t len){
         return ret;
     if (ret != len)
         exit(EXIT_FAILURE);
-    char bufend[2] = {'\r', '\n'};
-    while(writen(sockfd, bufend, 2) != 2);
+    char bufend[1] = {'\r'};
+    while(writen(sockfd, bufend, 1) != 1);
     return ret;
 }
 

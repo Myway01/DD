@@ -15,7 +15,7 @@ class MySqlConn
         void getSelectRes(int* rows);
         char* getSelectRes();
         char** getNextLine();
-        void getAffectedRows(int* rows);
+        int getAffectedRows();
 
     protected:
         MYSQL mysql;

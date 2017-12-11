@@ -11,7 +11,7 @@ void *thread_serve(void* arg){
 	int connfd = 0;
 	int ret = 0;
 
-	//pthread_detach(pthread_self());
+	pthread_detach(pthread_self());
 
 	if (arg == NULL){
 		return NULL;
@@ -35,7 +35,8 @@ void *thread_serve(void* arg){
     else{
         switch (type){
             case 0: proc_test(connfd); break;
-            case 1: proc_login(connfd); break;
+            case 1: proc_login_cli(connfd); break;
+            case 2: proc_signup_cli(connfd); break;
         }
     }
 	return NULL;
@@ -63,7 +64,7 @@ void TcpServer::Serve(){
         pthread_t tid = 0;
 		int *pCon = new int;
 		*pCon = connfd;
-        thread_serve((void *)pCon);
-		//pthread_create(&tid, NULL, thread_serve, (void *)pCon);
+        //thread_serve((void *)pCon);
+		pthread_create(&tid, NULL, thread_serve, (void *)pCon);
     }
 }

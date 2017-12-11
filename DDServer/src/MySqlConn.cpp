@@ -66,6 +66,6 @@ char** MySqlConn::getNextLine(){
     return mysql_fetch_row(res);
 }
 
-void MySqlConn::getAffectedRows(int* rows){
-    *rows = mysql_affected_rows(&mysql);
+int MySqlConn::getAffectedRows(){
+    return mysql_affected_rows(&mysql);
 }
