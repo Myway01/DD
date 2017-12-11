@@ -1,0 +1,19 @@
+#ifndef WEBCONN_H
+#define WEBCONN_H
+
+#include <QObject>
+#include <QWebEngineView>
+#include <QWebChannel>
+
+class WebConn : public QObject
+{
+    Q_OBJECT
+public:
+    explicit WebConn(QWebEngineView *mapview, QString name, QObject *parent = nullptr);
+
+signals:
+
+public slots:
+};
+
+#endif // WEBCONN_H

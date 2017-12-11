@@ -503,7 +503,7 @@
       </sizepolicy>
      </property>
      <property name="styleSheet">
-      <string notr="true">border-image: url(:/new/icon/car.png);</string>
+      <string notr="true">border-image: url(:/new/icon/rsc/car.png);</string>
      </property>
      <property name="text">
       <string/>

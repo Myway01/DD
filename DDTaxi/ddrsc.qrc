@@ -1,8 +1,9 @@
 <RCC>
     <qresource prefix="/new/icon">
-        <file>car.png</file>
+        <file>rsc/car.png</file>
     </qresource>
     <qresource prefix="/new/map">
-        <file>test-4.html</file>
+        <file>rsc/test-4.html</file>
+        <file>rsc/qwebchannel.js</file>
     </qresource>
 </RCC>

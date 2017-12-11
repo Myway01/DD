@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2017-10-29T22:40:43
+# Project created by QtCreator 2017-12-11T16:16:52
 #
 #-------------------------------------------------
 
@@ -30,7 +30,9 @@ SOURCES += \
     SignupWidget.cpp \
     CallWidget.cpp \
     socketAPI.cpp \
-    ordWidget.cpp
+    OrderWidget.cpp \
+    MapConn.cpp \
+    TcpClient.cpp
 
 HEADERS += \
     LoginWidget.h \
@@ -38,15 +40,19 @@ HEADERS += \
     SignupWidget.h \
     CallWidget.h \
     socketAPI.h \
-    ordWidget.h
+    OrderWidget.h \
+    MapConn.h \
+    TcpClient.h \
+    ddstructs.h
 
 FORMS += \
     LoginWidget.ui \
     SignupWidget.ui \
     CallWidget.ui \
-    ordWidget.ui
+    OrderWidget.ui
+
+SUBDIRS += \
+    .
 
 RESOURCES += \
     ddrsc.qrc
-
-DISTFILES +=

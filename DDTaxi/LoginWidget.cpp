@@ -1,4 +1,8 @@
-﻿#include "LoginWidget.h"
+﻿#if _MSC_VER >= 1600
+#pragma execution_character_set("utf-8")
+#endif
+
+#include "LoginWidget.h"
 #include "ui_LoginWidget.h"
 #include <QSqlQuery>
 #include <QCryptographicHash>

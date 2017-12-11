@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ordWidget</class>
- <widget class="QWidget" name="ordWidget">
+ <class>OrderWidget</class>
+ <widget class="QWidget" name="OrderWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -26,7 +26,7 @@
    <string>Form</string>
   </property>
   <property name="autoFillBackground">
-   <bool>true</bool>
+   <bool>false</bool>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(207, 255, 242);</string>

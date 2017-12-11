@@ -39,7 +39,9 @@
                 font-family:"楷体";
         }
 </style>
-<script language="javascript">
+<script language="javascript" type="text/javascript" src="./qwebchannel.js"></script>
+<script language="javascript" type="text/javascript">
+	var Qconn;
 var s="";
 var sum_s=0;
 var sum_p=0;
@@ -52,6 +54,8 @@ function add(){
         document.all.score.value="";
         document.all.point.value="";
         document.getElementById("result").innerHTML=s;
+        var a = 0.234;
+        Qconn.recvText(a);
 }
 function avr(){
         if(document.all.subject.value!=""&&document.all.score.value!=""&&document.all.point.value!="") add();
@@ -73,6 +77,12 @@ function del(){
 function Qttest (qs) {
         document.getElementById("result").innerHTML=qs;
 }
+window.onload=function(){
+    new QWebChannel(qt.webChannelTransport, function(channel) {
+    Qconn = channel.objects.QtConn;
+    Qconn.sendText.connect(function (qs){Qttest(qs);});
+    }); 
+}
 </script>
 </head>
 <body bgcolor="#66FFFF">
@@ -90,7 +100,7 @@ function Qttest (qs) {
         </tr>
         <tr><td>&nbsp;</td></tr>
         <tr>
-                <td width="30%" align="center" colspan="1"><input type="button" value="添加科目" size="10" onClick="Qttest('123')" class="STYLE5"></td>
+                <td width="30%" align="center" colspan="1"><input type="button" value="添加科目" size="10" onClick="add()" class="STYLE5"></td>
             <td width="30%" align="center" colspan="1"><input type="button" value="计算结果" size="10" onClick="avr()" class="STYLE5"></td>
             <td width="30%" align="center" colspan="1"><input type="button" value="重新计算" size="10" onClick="del()" class="STYLE5"></td>
         </tr>

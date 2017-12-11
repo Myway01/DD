@@ -2,6 +2,9 @@
 #define CALLWIDGET_H
 
 #include <QWidget>
+#include <QWebEngineView>
+
+#include "MapConn.h"
 
 namespace Ui {
 class CallWidget;
@@ -15,6 +18,8 @@ public:
     ~CallWidget();
 private:
     Ui::CallWidget *ui;
+    QWebEngineView *map_view;
+    MapConn *mapconn;
 
 signals:
 

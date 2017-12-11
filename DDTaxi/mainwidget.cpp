@@ -33,7 +33,7 @@ MainWidget::MainWidget(QWidget *parent) : QWidget(parent)
     suw = new SignupWidget();
     caw = new CallWidget();
     lay->setMargin(0);
-    this->setWindowIcon(QIcon(":/new/icon/car.png"));
+    this->setWindowIcon(QIcon(":/new/icon/rsc/car.png"));
     showWidget(lgw);
     connect(lgw, SIGNAL(login()), this, SLOT(showcaw()));
     connect(lgw, SIGNAL(signup()), this, SLOT(showsuw()));
