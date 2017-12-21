@@ -4,6 +4,7 @@
 #include <QSqlError>
 #include <QTextCodec>
 #include "MainWidget.h"
+#include "TcpClient.h"
 
 int main(int argc, char *argv[])
 {
@@ -11,7 +12,9 @@ int main(int argc, char *argv[])
 
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
 
-    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
+    WinsockStart();
+
+    /*QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
     db.setHostName("127.0.0.1");
     db.setUserName("root");
     db.setPassword("asd123456");
@@ -21,7 +24,7 @@ int main(int argc, char *argv[])
         qDebug() << "false" << db.lastError().text();
     }
     else
-        qDebug() << "true";
+        qDebug() << "true";*/
 
     MainWidget mw;
     mw.show();

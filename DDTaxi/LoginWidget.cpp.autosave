@@ -55,15 +55,47 @@ LoginWidget::~LoginWidget()
 
 void LoginWidget::on_pushButton_signin_clicked()
 {
-    switch (signinCli(QString(this->ui->lineEdit_username->text()), QString(this->ui->lineEdit_password->text()))) {
+    QString username = this->ui->lineEdit_username->text();
+    QString password = this->ui->lineEdit_password->text();
+    if (username.length() != 11){
+        if(username.length() == 0){
+            this->ui->label_error->setText("请输入用户名！");
+            this->ui->lineEdit_username->setFocus();
+        }
+        else{
+            this->ui->label_error->setText("用户名格式错误！");
+            this->ui->lineEdit_username->setFocus();
+            this->ui->lineEdit_username->selectAll();
+        }
+        return;
+    }
+    if (password.length() < 6){
+        if(password.length() == 0){
+            this->ui->label_error->setText("请输入密码！");
+            this->ui->lineEdit_password->setFocus();
+        }
+        else{
+            this->ui->label_error->setText("密码长度不足！");
+            this->ui->lineEdit_password->setFocus();
+            this->ui->lineEdit_password->selectAll();
+        }
+        return;
+    }
+    this->ui->label_error->setText("等待服务器响应...");
+    
+    switch (signinCli(username, password)) {
     case DD_INTERNETERR:
         this->ui->label_error->setText("网络错误！");
         break;
     case -2:
         this->ui->label_error->setText("用户名不存在！");
+        this->ui->lineEdit_username->setFocus();
+        this->ui->lineEdit_username->selectAll();
         break;
     case -1:
         this->ui->label_error->setText("密码错误，请重新输入！");
+        this->ui->lineEdit_password->setFocus();
+        this->ui->lineEdit_password->selectAll();
         break;
     case 0:
         emit login();
@@ -71,7 +103,7 @@ void LoginWidget::on_pushButton_signin_clicked()
         this->ui->label_error->setText("");
         break;
     }
-
+    return;
 }
 
 void LoginWidget::on_pushButton_signup_clicked()

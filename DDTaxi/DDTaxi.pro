@@ -32,7 +32,9 @@ SOURCES += \
     socketAPI.cpp \
     OrderWidget.cpp \
     MapConn.cpp \
-    TcpClient.cpp
+    TcpClient.cpp \
+    DDprocess.cpp \
+    CliInfo.cpp
 
 HEADERS += \
     LoginWidget.h \
@@ -43,7 +45,9 @@ HEADERS += \
     OrderWidget.h \
     MapConn.h \
     TcpClient.h \
-    ddstructs.h
+    DDstructs.h \
+    DDprocess.h \
+    CliInfo.h
 
 FORMS += \
     LoginWidget.ui \
