@@ -4,7 +4,6 @@
 #include <stdio.h>
 
 #include "socketAPI.h"
-#include "socktype.h"
 #include "MySqlConn.h"
 
 #include <iostream>
@@ -55,18 +54,39 @@ void proc_login_cli(int connfd){
     char sql[256] = {0};//sql语句
     sprintf(sql, "SELECT psw FROM CLIENT WHERE tel='%s'", lg.tel);
     db.exec(sql);
-    char* psw = db.getSelectRes();//查询到的密码
+    char* sqlres = db.getSelectRes();//查询到的密码
     char r;//回复数据
-    if (psw != NULL)
-        r = ((strcmp(psw, lg.psw) == 0) ? 0 : -1);//0代表成功，-1代表密码错误
+    if (sqlres != NULL)
+        r = ((strcmp(sqlres, lg.psw) == 0) ? 0 : -1);//0代表成功，-1代表密码错误
     else
         r = -2;//-2代表用户不存在
 
     ret = write_timeout(connfd, 5);
-    if (ret != 0){
+    if (ret < 0){
         return;
     }
     writeline(connfd, &r, 1);
+    if (r == 0){//如果成功，则发送用户信息
+        struct DD_info_cli info;
+
+        memset(sql, 0, sizeof(sql));
+        sprintf(sql, "SELECT nickname FROM CLIENT WHERE tel='%s'", lg.tel);
+        db.exec(sql);
+        sqlres = db.getSelectRes();
+        if (sqlres != NULL)
+            strcpy(info.nickname, sqlres);
+
+        memset(sql, 0, sizeof(sql));
+        sprintf(sql, "SELECT bal FROM CLIENT WHERE tel='%s'", lg.tel);
+        db.exec(sql);
+        sqlres = db.getSelectRes();
+        if (sqlres != NULL)
+            strcpy(info.bal, sqlres);
+
+        ret = write_timeout(connfd, 5);
+        if (ret < 0) return;
+        writeline(connfd, (char*)&info, sizeof(info));
+    }
     cout << connfd << "end\n";
 }
 

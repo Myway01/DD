@@ -20,23 +20,24 @@ void *thread_serve(void* arg){
 	delete((int *)arg);
 	cout << connfd <<"connect\n";
 
-	while((ret = read_timeout(connfd, 5)) == -2);//如果超时继续读取
-    if (ret == -1){
-        close(connfd);
-        return NULL;
-    }
-    char type = 0;
-    ret = readline(connfd, &type, 1);
-    //cout << ret << "\n";
-    if (ret <= 0){
-        close(connfd);
-        return NULL;
-    }
-    else{
-        switch (type){
-            case 0: proc_test(connfd); break;
-            case 1: proc_login_cli(connfd); break;
-            case 2: proc_signup_cli(connfd); break;
+	while(1){//如果超时继续读取
+        if((ret = read_timeout(connfd, 45)) < 0){
+            close(connfd);
+            break;
+        }
+        char type = 0;
+        ret = readline(connfd, &type, 1);
+        //cout << ret << "\n";
+        if (ret <= 0){
+            close(connfd);
+            return NULL;
+        }
+        else{
+            switch (type){
+                case DD_HEART: proc_test(connfd); break;
+                case DD_LOGIN_CLI: proc_login_cli(connfd); break;
+                case DD_SIGNUP_CLI: proc_signup_cli(connfd); break;
+            }
         }
     }
 	return NULL;

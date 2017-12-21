@@ -36,7 +36,9 @@
 		<Linker>
 			<Add option="-lmysqlclient" />
 			<Add option="-lpthread" />
+			<Add option="-lhiredis" />
 		</Linker>
+		<Unit filename="include/DDredis.h" />
 		<Unit filename="include/MySqlConn.h" />
 		<Unit filename="include/ServerProc.h">
 			<Option target="&lt;{~None~}&gt;" />
@@ -44,6 +46,7 @@
 		<Unit filename="include/TcpServer.h" />
 		<Unit filename="include/socketAPI.h" />
 		<Unit filename="include/socktype.h" />
+		<Unit filename="src/DDredis.cpp" />
 		<Unit filename="src/MySqlConn.cpp" />
 		<Unit filename="src/ServerProc.cpp" />
 		<Unit filename="src/TcpServer.cpp" />
