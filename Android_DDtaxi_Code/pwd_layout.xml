@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/bg"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/top"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/title_bg" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20.0dip"
+            android:text="@string/pwdSetting"
+            android:textColor="@android:color/white"
+            android:textSize="20.0sp" />
+
+        <Button
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="5.0dip"
+            android:layout_marginRight="10.0dip"
+            android:background="@drawable/btn_selector"
+            android:padding="5.0dip"
+            android:text="@string/back"
+            android:textColor="@android:color/white" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/top"
+        android:orientation="vertical"
+        android:padding="10.0dip" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10.0dip"
+                android:text="请输入您的旧密码"
+                android:textColor="@color/hintColor"
+                android:textSize="20.0sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/oldPwdEdit"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30.0dip"
+                android:layout_marginRight="30.0dip"
+                android:layout_marginTop="10.0dip"
+                android:background="@drawable/input2_bg"
+                android:gravity="center"
+                android:password="true"
+                android:hint="@string/enterOldPwd"
+                android:inputType="numberPassword"
+                android:paddingLeft="5.0dip" >
+            </EditText>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1.0dip"
+                android:layout_marginTop="20.0dip"
+                android:background="@drawable/line" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20.0dip"
+                android:text="请输入您的新密码"
+                android:textColor="@color/hintColor"
+                android:textSize="20.0sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/newPwdEdit"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30.0dip"
+                android:layout_marginRight="30.0dip"
+                android:layout_marginTop="10.0dip"
+                android:background="@drawable/input2_bg"
+                android:gravity="center"
+                android:password="true"
+                android:hint="@string/enterNewPwd"
+                android:inputType="numberPassword"
+                android:paddingLeft="5.0dip" >
+            </EditText>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10.0dip"
+                android:text="再次输入您的新密码"
+                android:textColor="@color/hintColor"
+                android:textSize="20.0sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/newsurePwdEdit"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30.0dip"
+                android:layout_marginRight="30.0dip"
+                android:layout_marginTop="10.0dip"
+                android:background="@drawable/input2_bg"
+                android:gravity="center"
+                android:password="true"
+                android:hint="@string/enterNewPwd"
+                android:inputType="numberPassword"
+                android:paddingLeft="5.0dip" >
+            </EditText>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1.0dip"
+                android:layout_marginTop="20.0dip"
+                android:background="@drawable/line" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20.0dip"
+                android:text="注：密码数字组成至少6位密码，最多输入18位。"
+                android:textColor="@color/hintColor"
+                android:textSize="16.0sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10.0dip"
+                android:layout_marginTop="20.0dip"
+                android:background="@drawable/long_button_selector"
+                android:text="@string/sure"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
