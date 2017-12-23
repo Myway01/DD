@@ -1,4 +1,4 @@
-#include <QApplication>
+﻿#include <QApplication>
 #include <QSqlDatabase>
 #include <QDebug>
 #include <QSqlError>

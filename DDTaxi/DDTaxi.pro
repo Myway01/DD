@@ -34,7 +34,8 @@ SOURCES += \
     MapConn.cpp \
     TcpClient.cpp \
     DDprocess.cpp \
-    CliInfo.cpp
+    CliInfo.cpp \
+    Worker.cpp
 
 HEADERS += \
     LoginWidget.h \
@@ -47,7 +48,8 @@ HEADERS += \
     TcpClient.h \
     DDstructs.h \
     DDprocess.h \
-    CliInfo.h
+    CliInfo.h \
+    Worker.h
 
 FORMS += \
     LoginWidget.ui \

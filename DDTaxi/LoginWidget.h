@@ -1,4 +1,4 @@
-#ifndef LOGINWIDGET_H
+﻿#ifndef LOGINWIDGET_H
 #define LOGINWIDGET_H
 
 #include <QWidget>
@@ -18,15 +18,21 @@ public:
 signals:
     void login();
     void signup();
+    void login_sig(QString,QString);
 
 private slots:
     void on_pushButton_signup_clicked();
 
     void on_pushButton_signin_clicked();
 
+    void login_slot(int);
+
+protected:
+    void showEvent(QShowEvent *);
+
 private:
     Ui::LoginWidget *ui;
-    int checkIn(const QString &username, const QString &password);
+    //int checkIn(const QString &username, const QString &password);
 };
 
 #endif // LOGINWIDGET_H

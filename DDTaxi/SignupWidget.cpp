@@ -1,4 +1,8 @@
-﻿#include "SignupWidget.h"
+﻿#if _MSC_VER >= 1600
+#pragma execution_character_set("utf-8")
+#endif
+
+#include "SignupWidget.h"
 #include "ui_SignupWidget.h"
 
 SignupWidget::SignupWidget(QWidget *parent) :
@@ -14,6 +18,17 @@ SignupWidget::~SignupWidget()
     delete ui;
 }
 
+void SignupWidget::showEvent(QShowEvent *){
+    ui->lineEdit_tel->clear();
+    ui->lineEdit_nickname->clear();
+    ui->lineEdit_psw->clear();
+    ui->lineEdit_cpsw->clear();
+    ui->lineEdit_paypsw->clear();
+    ui->lineEdit_cpaypsw->clear();
+    ui->label_error->clear();
+    ui->lineEdit_tel->setFocus();
+}
+
 void SignupWidget::on_pushButton_ret_clicked()
 {
     emit ret();
@@ -26,8 +41,8 @@ void SignupWidget::on_pushButton_signup_clicked()
     QString psw = this->ui->lineEdit_psw->text();
     QString cpsw = this->ui->lineEdit_cpsw->text();
     QString paypsw = this->ui->lineEdit_paypsw->text();
-    QString cpaypsw = this->ui->label_cpaypsw->text();
-    
+    QString cpaypsw = this->ui->lineEdit_cpaypsw->text();
+
     if (username.length() != 11){
         if(username.length() == 0){
             this->ui->label_error->setText("请输入手机号码！");
@@ -86,5 +101,4 @@ void SignupWidget::on_pushButton_signup_clicked()
         return;
     }
     this->ui->label_error->setText("等待服务器响应...");
-    
 }

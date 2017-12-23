@@ -1,4 +1,4 @@
-#ifndef SIGNUPWIDGET_H
+﻿#ifndef SIGNUPWIDGET_H
 #define SIGNUPWIDGET_H
 
 #include <QWidget>
@@ -22,6 +22,11 @@ signals:
 private slots:
     void on_pushButton_ret_clicked();
 
+    void on_pushButton_signup_clicked();
+
+protected:
+    void showEvent(QShowEvent *);
+    
 private:
     Ui::SignupWidget *ui;
 };

@@ -1,4 +1,4 @@
-#include "MainWidget.h"
+﻿#include "MainWidget.h"
 #include <QDebug>
 #include <QIcon>
 
@@ -12,6 +12,7 @@ void MainWidget::showWidget(QWidget *w){
     this->setMaximumSize(w->maximumSize());
     this->setMinimumSize(w->minimumSize());
     lay->addWidget(w);
+    w->show();
 }
 
 MainWidget::~MainWidget(){
