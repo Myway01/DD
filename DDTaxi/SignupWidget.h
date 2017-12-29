@@ -15,17 +15,21 @@ public:
     explicit SignupWidget(QWidget *parent = 0);
     ~SignupWidget();
 
+    void showinit();
+
 signals:
     void ret();
     void signup();
+    void signup_sig(const QString &tel, const QString &nickname, const QString &psw, const QString &paypsw);
 
 private slots:
     void on_pushButton_ret_clicked();
 
     void on_pushButton_signup_clicked();
 
+    void signup_slot(int ret);
+
 protected:
-    void showEvent(QShowEvent *);
     
 private:
     Ui::SignupWidget *ui;

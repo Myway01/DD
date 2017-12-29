@@ -4,6 +4,7 @@
 
 #include "SignupWidget.h"
 #include "ui_SignupWidget.h"
+#include "Worker.h"
 
 SignupWidget::SignupWidget(QWidget *parent) :
     QWidget(parent),
@@ -18,7 +19,7 @@ SignupWidget::~SignupWidget()
     delete ui;
 }
 
-void SignupWidget::showEvent(QShowEvent *){
+void SignupWidget::showinit(){
     ui->lineEdit_tel->clear();
     ui->lineEdit_nickname->clear();
     ui->lineEdit_psw->clear();
@@ -101,4 +102,42 @@ void SignupWidget::on_pushButton_signup_clicked()
         return;
     }
     this->ui->label_error->setText("等待服务器响应...");
+
+    Worker *worker = new Worker();
+    connect(this, SIGNAL(signup_sig(QString,QString,QString,QString)), worker, SLOT(signupCli(QString,QString,QString,QString)));
+    connect(worker, SIGNAL(numret(int)), this, SLOT(signup_slot(int)));
+    emit signup_sig(username, nickname, psw, paypsw);
+    this->ui->pushButton_ret->setEnabled(false);
+    this->ui->pushButton_signup->setEnabled(false);
+    return;
+}
+
+void SignupWidget::signup_slot(int ret){
+    switch (ret) {
+    case DD_INTERNETERR:
+        this->ui->label_error->setText("网络错误！");
+        break;
+    case DD_INTERNETTIMEOUT:
+        this->ui->label_error->setText("网络连接超时！");
+        break;
+    case -2:
+        this->ui->label_error->setText("注册失败！");
+        this->ui->lineEdit_tel->setFocus();
+        this->ui->lineEdit_tel->selectAll();
+        break;
+    case -1:
+        this->ui->label_error->setText("用户名已存在！");
+        this->ui->lineEdit_tel->setFocus();
+        this->ui->lineEdit_tel->selectAll();
+        break;
+    case 0:
+        this->ui->label_error->setText("注册成功！");
+        break;
+    default:
+        this->ui->label_error->setText("未知错误！");
+        break;
+    }
+    this->ui->pushButton_ret->setEnabled(true);
+    this->ui->pushButton_signup->setEnabled(true);
+    return;
 }

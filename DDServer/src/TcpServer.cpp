@@ -35,8 +35,24 @@ void *thread_serve(void* arg){
         else{
             switch (type){
                 case DD_HEART: proc_test(connfd); break;
+
                 case DD_LOGIN_CLI: proc_login_cli(connfd); break;
                 case DD_SIGNUP_CLI: proc_signup_cli(connfd); break;
+                case DD_GETCARS_CLI: proc_getcars_cli(connfd); break;
+                case DD_SETSTARTPOS_CLI: proc_setstartpos_cli(connfd); break;
+                case DD_DELSTARTPOS_CLI: proc_delstartpos_cli(connfd); break;
+                case DD_CHECKORD_CLI: proc_checkord_cli(connfd); break;
+                case DD_SENDPOS_CLI: proc_sendpos_cli(connfd); break;
+                case DD_DELORDPOS_CLI: proc_delpos_cli(connfd); break;
+                case DD_PAY_CLI: proc_pay_cli(connfd); break;
+
+                case DD_LOGIN_DRV: proc_login_drv(connfd); break;
+                case DD_SIGNUP_DRV: proc_signup_drv(connfd); break;
+                case DD_LISTEN_DRV: proc_listen_drv(connfd); break;
+                case DD_DELPOS_DRV: proc_delpos_drv(connfd); break;
+                case DD_SENDSTATE_DRV: proc_sendstate_drv(connfd); break;
+                case DD_SENDPOS_DRV: proc_sendpos_drv(connfd); break;
+                case DD_GETINFO_DRV: proc_getinfo_drv(connfd); break;
             }
         }
     }

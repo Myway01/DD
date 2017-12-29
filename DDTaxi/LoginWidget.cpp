@@ -9,6 +9,7 @@
 #include <QDebug>
 //#include "DDprocess.h"
 #include "Worker.h"
+#include "CliInfo.h"
 
 LoginWidget::LoginWidget(QWidget *parent) :
     QWidget(parent),
@@ -23,7 +24,7 @@ LoginWidget::~LoginWidget()
     delete ui;
 }
 
-void LoginWidget::showEvent(QShowEvent *){
+void LoginWidget::showinit(){
     ui->lineEdit_username->clear();
     ui->lineEdit_password->clear();
     ui->label_error->clear();
@@ -63,6 +64,10 @@ void LoginWidget::showEvent(QShowEvent *){
 
 void LoginWidget::on_pushButton_signin_clicked()
 {
+    /*emit login();
+    CliInfo *info = CliInfo::getCliInfo();
+    strcpy(info->tel, "18322303006");
+    return;*/
     QString username = this->ui->lineEdit_username->text();
     QString password = this->ui->lineEdit_password->text();
     if (username.length() != 11){
@@ -95,10 +100,11 @@ void LoginWidget::on_pushButton_signin_clicked()
     Worker *worker = new Worker();
     connect(this, SIGNAL(login_sig(QString,QString)), worker, SLOT(signinCli(QString,QString)));
     connect(worker, SIGNAL(numret(int)), this, SLOT(login_slot(int)));
-    //worker.signinCli(username, password);
+    //worker->signinCli(username, password);
     emit login_sig(username, password);
     this->ui->pushButton_signin->setEnabled(false);
     this->ui->pushButton_signup->setEnabled(false);
+    return;
 }
 
 void LoginWidget::on_pushButton_signup_clicked()
@@ -126,8 +132,9 @@ void LoginWidget::login_slot(int ret){
         break;
     case 0:
         emit login();
+        break;
     default:
-        this->ui->label_error->setText("");
+        this->ui->label_error->setText("未知错误！");
         break;
     }
     this->ui->pushButton_signin->setEnabled(true);

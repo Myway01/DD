@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/new/icon">
+        <file>rsc/car.png</file>
+    </qresource>
+    <qresource prefix="/new/map">
+        <file>rsc/cur.png</file>
+        <file>rsc/end.png</file>
+        <file>rsc/map.html</file>
+        <file>rsc/qwebchannel.js</file>
+        <file>rsc/start.png</file>
+    </qresource>
+</RCC>

@@ -1,4 +1,4 @@
-#ifndef MAINWIDGET_H
+﻿#ifndef MAINWIDGET_H
 #define MAINWIDGET_H
 
 #include <QWidget>
@@ -6,6 +6,8 @@
 #include "LoginWidget.h"
 #include "SignupWidget.h"
 #include "CallWidget.h"
+#include "InfoWidget.h"
+#include "PayWidget.h"
 
 class MainWidget : public QWidget
 {
@@ -16,6 +18,8 @@ private:
     LoginWidget *lgw;
     SignupWidget *suw;
     CallWidget *caw;
+    InfoWidget *ifw;
+    PayWidget *paw;
 
     void showWidget(QWidget *);
 
@@ -27,8 +31,11 @@ signals:
 
 public slots:
     int showcaw();
+    int retcaw();
     int showsuw();
     int showlgw();
+    int showifw();
+    int showpaw();
 
 };
 

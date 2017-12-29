@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1513845975 source:/home/my-way/桌面/pro/DDServer/src/main.cpp
+1514200572 source:/home/my-way/桌面/pro/DDServer/src/main.cpp
 	<iostream>
 	<cstring>
 	<cstdio>
@@ -61,7 +61,7 @@
 	<stdio.h>
 	<stdlib.h>
 
-1513762484 source:/home/my-way/桌面/pro/DDServer/src/TcpServer.cpp
+1514483166 source:/home/my-way/桌面/pro/DDServer/src/TcpServer.cpp
 	"TcpServer.h"
 	<string.h>
 	"ServerProc.h"
@@ -86,30 +86,33 @@
 	"socketAPI.h"
 	<string.h>
 
-1513762839 source:/home/my-way/桌面/pro/DDServer/src/ServerProc.cpp
+1514541687 source:/home/my-way/桌面/pro/DDServer/src/ServerProc.cpp
 	"ServerProc.h"
 	<string.h>
 	<stdio.h>
+	<stdlib.h>
 	"socketAPI.h"
 	"MySqlConn.h"
+	"DDredis.h"
 	<iostream>
 
-1513762839 /home/my-way/桌面/pro/DDServer/include/ServerProc.h
+1514483034 /home/my-way/桌面/pro/DDServer/include/ServerProc.h
 	"socktype.h"
 
-1512820244 source:/home/my-way/桌面/pro/DDServer/src/MySqlConn.cpp
+1514106577 source:/home/my-way/桌面/pro/DDServer/src/MySqlConn.cpp
 	"MySqlConn.h"
 
 1512820244 /home/my-way/桌面/pro/DDServer/include/MySqlConn.h
 	<mysql/mysql.h>
 
-1513762484 /home/my-way/桌面/pro/DDServer/include/socktype.h
+1514483166 /home/my-way/桌面/pro/DDServer/include/socktype.h
 
-1513626859 source:/home/my-way/桌面/pro/DDServer/src/DDredis.cpp
+1514543975 source:/home/my-way/桌面/pro/DDServer/src/DDredis.cpp
 	"DDredis.h"
 	<cstring>
+	<iostream>
 
-1513621470 /home/my-way/桌面/pro/DDServer/include/DDredis.h
+1514288508 /home/my-way/桌面/pro/DDServer/include/DDredis.h
 	<hiredis/hiredis.h>
 	"socktype.h"
 

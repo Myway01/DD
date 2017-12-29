@@ -9,6 +9,10 @@ public:
     char tel[12];
     char nickname[24];
     char bal[12];
+    char drvtel[12];
+    char drvnickname[24];
+    char drvcard[20];
+    char fare[8];   //本次出行费用
 private:
     CliInfo();
     CliInfo(const CliInfo&);

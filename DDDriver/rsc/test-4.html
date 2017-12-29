@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>加权成绩计算</title>
+<style>
+        .STYLE1{
+                font-size:36px;
+                font-weight:bold;
+                color:#6F0;
+                font-family:"楷体";
+        }
+        .STYLE2{
+                font-size:16px;
+                border-color:#6FF;
+                font-weight:bold;
+                color:#6F0;
+                font-family:"楷体";
+        }
+        .STYLE3{
+                font-size:16px;
+                background-color:#DDD;
+                font-weight:bold;
+                color:#6F0;
+                font-family:"楷体";
+        }
+        .STYLE4{
+                font-size:16px;
+                color:#6F0;
+                font-weight:bold;
+                font-family:"楷体";
+        }
+        .STYLE5{
+                font-size:16px;
+                border-color:#6FF;
+                background-color:#DDD;
+                font-weight:bold;
+                color:#6F0;
+                font-family:"楷体";
+        }
+</style>
+<script language="javascript" type="text/javascript" src="./qwebchannel.js"></script>
+<script language="javascript" type="text/javascript">
+	var Qconn;
+var s="";
+var sum_s=0;
+var sum_p=0;
+var a=0;
+function add(){
+        s=s+document.all.subject.value+' '+document.all.score.value+' '+document.all.point.value+"<br/>";
+        sum_s+=(parseFloat(document.all.score.value)*parseFloat(document.all.point.value));
+        sum_p+=parseFloat(document.all.point.value);
+        document.all.subject.value="";
+        document.all.score.value="";
+        document.all.point.value="";
+        document.getElementById("result").innerHTML=s;
+        var a = 0.234;
+        Qconn.recvText(a);
+}
+function avr(){
+        if(document.all.subject.value!=""&&document.all.score.value!=""&&document.all.point.value!="") add();
+        if(sum_p!=0) {
+                a=(sum_s/sum_p).toFixed(3);
+                s=s+"<br/>"+"加权成绩："+a;
+                document.getElementById("result").innerHTML=s;
+        }
+}
+function del(){
+        s="";
+        sum_s=0;
+        sum_p=0;
+        document.all.subject.value="";
+        document.all.score.value="";
+        document.all.point.value="";
+        document.getElementById("result").innerHTML="";
+}
+function Qttest (qs) {
+        document.getElementById("result").innerHTML=qs;
+}
+window.onload=function(){
+    new QWebChannel(qt.webChannelTransport, function(channel) {
+    Qconn = channel.objects.QtConn;
+    Qconn.sendText.connect(function (qs){Qttest(qs);});
+    }); 
+}
+</script>
+</head>
+<body bgcolor="#66FFFF">
+        <div align="center" class="STYLE1"><b>加权成绩计算系统</b></div>
+    <hr color="#999999" size="2"/>
+        <table align="center" width="200" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+                <td align="center" width="%100" colspan="3" class="STYLE2">科目：<input type="text" name="subject" size="10" class="STYLE3"></td>
+        </tr>
+        <tr>
+            <td align="center" width="%100" colspan="3" class="STYLE2">成绩：<input type="text" name="score" size="10" class="STYLE3"></td>
+        </tr>
+        <tr>
+            <td align="center" width="%100" colspan="3" class="STYLE2">学分：<input type="text" name="point" size="10" class="STYLE3"></td>
+        </tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr>
+                <td width="30%" align="center" colspan="1"><input type="button" value="添加科目" size="10" onClick="add()" class="STYLE5"></td>
+            <td width="30%" align="center" colspan="1"><input type="button" value="计算结果" size="10" onClick="avr()" class="STYLE5"></td>
+            <td width="30%" align="center" colspan="1"><input type="button" value="重新计算" size="10" onClick="del()" class="STYLE5"></td>
+        </tr>
+
+    </table>
+    <p align="center" id="result" class="STYLE4"></p>
+</body>
+</html>

@@ -2,8 +2,8 @@
 
 #include <cstring>
 
-//#include <iostream>
-//using std::cout;
+#include <iostream>
+using std::cout;
 
 DDredis::DDredis()
 {
@@ -57,11 +57,18 @@ bool DDredis::delGeo(char *tel, char *key){
 bool DDredis::getGeo(char *tel, char *key){
     freeRes();
     _reply = (redisReply*)redisCommand(_conn, "GEOPOS %s %s", key, tel);
+    cout<<_reply->type<<"here\n";
     if (_reply->type == REDIS_REPLY_ERROR){
+        geoReslen = 0;
+        return false;
+    }
+    else if (_reply->element[0]->type == REDIS_REPLY_NIL){
+        geoReslen = 0;
         return false;
     }
     else {
         geoReslen = _reply->elements;
+        cout<<_reply->elements;
         DD_geo **g = new DD_geo*[geoReslen];
         for (int i = 0; i < geoReslen; i++){
             g[i] = new DD_geo();
@@ -97,7 +104,7 @@ bool DDredis::getGeoAround(char *lng, char *lat, char *km, char *key){
 
 bool DDredis::setOrdPos(char *clitel, char *startPos, char *endPos){
     freeRes();
-    _reply = (redisReply*)redisCommand(_conn, "HMSET ord:%s startPos %s endPos %s", clitel, startPos, endPos);
+    _reply = (redisReply*)redisCommand(_conn, "HMSET ORD:%s startPos %s endPos %s", clitel, startPos, endPos);
     if (_reply->type == REDIS_REPLY_ERROR){
         return false;
     }
@@ -107,7 +114,7 @@ bool DDredis::setOrdPos(char *clitel, char *startPos, char *endPos){
 }
 bool DDredis::setOrdState(char *clitel, char *state){
     freeRes();
-    _reply = (redisReply*)redisCommand(_conn, "HSET ord:%s state %s", clitel, state);
+    _reply = (redisReply*)redisCommand(_conn, "HSET ORD:%s state %s", clitel, state);
     if (_reply->type == REDIS_REPLY_ERROR){
         return false;
     }
@@ -117,7 +124,17 @@ bool DDredis::setOrdState(char *clitel, char *state){
 }
 bool DDredis::setOrdDriver(char *clitel, char *driver){
     freeRes();
-    _reply = (redisReply*)redisCommand(_conn, "HSET ord:%s driver %s", clitel, driver);
+    _reply = (redisReply*)redisCommand(_conn, "HSET ORD:%s driver %s", clitel, driver);
+    if (_reply->type == REDIS_REPLY_ERROR){
+        return false;
+    }
+    else {
+        return true;
+    }
+}
+bool DDredis::setOrdFare(char *clitel, char *fare){
+    freeRes();
+    _reply = (redisReply*)redisCommand(_conn, "HSET ORD:%s fare %s", clitel, fare);
     if (_reply->type == REDIS_REPLY_ERROR){
         return false;
     }
@@ -127,7 +144,7 @@ bool DDredis::setOrdDriver(char *clitel, char *driver){
 }
 bool DDredis::delOrd(char *clitel){
     freeRes();
-    _reply = (redisReply*)redisCommand(_conn, "DEL ord:%s ", clitel);
+    _reply = (redisReply*)redisCommand(_conn, "DEL ORD:%s ", clitel);
     if (_reply->type == REDIS_REPLY_ERROR){
         return false;
     }
@@ -137,7 +154,7 @@ bool DDredis::delOrd(char *clitel){
 }
 bool DDredis::getOrdStartPos(char *clitel){
     freeRes();
-    _reply = (redisReply*)redisCommand(_conn, "HGET ord:%s startPos", clitel);
+    _reply = (redisReply*)redisCommand(_conn, "HGET ORD:%s startPos", clitel);
     if (_reply->type == REDIS_REPLY_ERROR){
         return false;
     }
@@ -148,7 +165,7 @@ bool DDredis::getOrdStartPos(char *clitel){
 }
 bool DDredis::getOrdEndPos(char *clitel){
     freeRes();
-    _reply = (redisReply*)redisCommand(_conn, "HGET ord:%s endPos", clitel);
+    _reply = (redisReply*)redisCommand(_conn, "HGET ORD:%s endPos", clitel);
     if (_reply->type == REDIS_REPLY_ERROR){
         return false;
     }
@@ -159,7 +176,29 @@ bool DDredis::getOrdEndPos(char *clitel){
 }
 bool DDredis::getOrdState(char *clitel){
     freeRes();
-    _reply = (redisReply*)redisCommand(_conn, "HGET ord:%s state", clitel);
+    _reply = (redisReply*)redisCommand(_conn, "HGET ORD:%s state", clitel);
+    if (_reply->type == REDIS_REPLY_ERROR){
+        return false;
+    }
+    else {
+        strRes = _reply->str;
+        return true;
+    }
+}
+bool DDredis::getOrdDriver(char *clitel){
+    freeRes();
+    _reply = (redisReply*)redisCommand(_conn, "HGET ORD:%s driver", clitel);
+    if (_reply->type == REDIS_REPLY_ERROR){
+        return false;
+    }
+    else {
+        strRes = _reply->str;
+        return true;
+    }
+}
+bool DDredis::getOrdFare(char *clitel){
+    freeRes();
+    _reply = (redisReply*)redisCommand(_conn, "HGET ORD:%s fare", clitel);
     if (_reply->type == REDIS_REPLY_ERROR){
         return false;
     }

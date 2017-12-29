@@ -33,9 +33,10 @@ SOURCES += \
     OrderWidget.cpp \
     MapConn.cpp \
     TcpClient.cpp \
-    DDprocess.cpp \
     CliInfo.cpp \
-    Worker.cpp
+    Worker.cpp \
+    InfoWidget.cpp \
+    PayWidget.cpp
 
 HEADERS += \
     LoginWidget.h \
@@ -47,18 +48,22 @@ HEADERS += \
     MapConn.h \
     TcpClient.h \
     DDstructs.h \
-    DDprocess.h \
     CliInfo.h \
-    Worker.h
+    Worker.h \
+    InfoWidget.h \
+    PayWidget.h
 
 FORMS += \
     LoginWidget.ui \
     SignupWidget.ui \
     CallWidget.ui \
-    OrderWidget.ui
+    OrderWidget.ui \
+    InfoWidget.ui \
+    PayWidget.ui
 
 SUBDIRS += \
     .
 
 RESOURCES += \
+    ddrsc.qrc \
     ddrsc.qrc

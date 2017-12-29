@@ -5,5 +5,9 @@
     <qresource prefix="/new/map">
         <file>rsc/test-4.html</file>
         <file>rsc/qwebchannel.js</file>
+        <file>rsc/map.html</file>
+        <file>rsc/cur.png</file>
+        <file>rsc/end.png</file>
+        <file>rsc/start.png</file>
     </qresource>
 </RCC>

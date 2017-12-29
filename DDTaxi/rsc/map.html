@@ -1,0 +1,331 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<style type="text/css">
+		body, html{width: 100%;height: 100%;margin:0;font-family:"微软雅黑";font-size:14px;}
+		#allmap{height:80%;width:100%;}
+		#start_pos,end_pos{width:50%;float:left;}
+		
+	</style>
+	<script language="javascript" type="text/javascript" src="qwebchannel.js"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/getscript?v=2.0&ak=zh7akaqG4kpzxmDnRZLwXBHHi85A9LnY&services=&t=20171220141726"></script>
+	<title>DDTaxi</title>
+</head>
+<body>
+	<div id="allmap"></div>
+	<div id="start_pos">起点:<input type="text" id="startposId" size="20" value="DD起点" style="width:150px;" /></div>
+	<div id="end_pos">终点:<input type="text" id="endposId" size="20" value="DD终点" style="width:150px;" /></div>
+	<div id="startResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
+	<div id="endResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
+</body>
+</html>
+<script type="text/javascript">
+	var Qconn;//Qt连接器
+	var cars = new Array(10);
+	for (var i = 0; i < 10; i++){
+		cars[i] = null;
+	}
+	// 百度地图API功能
+	var map = new BMap.Map("allmap");
+	map.enableScrollWheelZoom(true); //启用地图滚轮放大缩小
+	
+	var curIcon = new BMap.Icon("cur.png", new BMap.Size(37, 62), {imageSize: new BMap.Size(24, 36),anchor: new BMap.Size(12, 36)});//当前位置标识
+	var startIcon = new BMap.Icon("start.png", new BMap.Size(37, 62), {imageSize: new BMap.Size(24, 36),anchor: new BMap.Size(12, 36)});//起点标识
+	var endIcon = new BMap.Icon("end.png", new BMap.Size(37, 62), {imageSize: new BMap.Size(24, 36),anchor: new BMap.Size(12, 36)});//终点标识
+	
+	var myPos = new BMap.Point(116.404, 39.915);
+	var myPosMk = new BMap.Marker(myPos, {icon:curIcon});	//当前地点
+	myPosMk.disableMassClear();//保证不被删除
+	map.centerAndZoom(myPos,15);
+	
+	var startPos = new BMap.Point(116.404, 39.915);
+	var startPosMk = new BMap.Marker(startPos, {icon:startIcon});	//起点
+	var startPosStr = "";//地址
+	startPosMk.disableMassClear();//保证不被删除
+	startPosMk.enableDragging();//可拖拽
+	startPosMk.setTop(true);//置顶起点以便拖拽
+	addindex_start();//绑定起点索引有关事件
+	
+	var endPos = new BMap.Point(116.404, 39.915);
+	var endPosMk = new BMap.Marker(endPos, {icon:endIcon});	//终点
+	var endPosStr = "";
+	var isendPos = 0;//标识当前是否显示终点
+	endPosMk.disableMassClear();//保证不被删除
+	addindex_end();//绑定终点索引有关事件
+	
+	//初始环境时定位
+	var geolocation = new BMap.Geolocation();
+	geolocation.getCurrentPosition(function(r){
+		if(this.getStatus() == BMAP_STATUS_SUCCESS){
+			myPos.lng = r.point.lng;
+			myPos.lat = r.point.lat;//初始化当前位置
+			Qconn.setCurPos_slot(myPos.lng,myPos.lat);//将当前位置传给QT
+			myPosMk.setPosition(myPos);
+			//alert('您的位置：'+r.point.lng+','+r.point.lat);
+			map.addOverlay(myPosMk);
+			
+			startPos.lng = r.point.lng;
+			startPos.lat = r.point.lat;//初始化起点为当前位置
+			Qconn.setStartPos_slot(startPos.lng,startPos.lat);//将位置信息传给QT
+			startPosMk.setPosition(startPos);
+			map.addOverlay(startPosMk);
+			
+			map.centerAndZoom(myPos,15);//移动地图至当前位置
+			
+			//初始起点名称获取
+			var geoc = new BMap.Geocoder(); 
+			geoc.getLocation(startPos, function(rs){
+			var addComp = rs.addressComponents;
+			startPosStr = addComp.province + addComp.city + addComp.district + addComp.street + addComp.streetNumber;
+			Qconn.setStartPosStr_slot(startPosStr);//将当前起点名传给QT
+			//alert(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);  
+			G("startposId").value = startPosStr;
+ 		 });
+		}
+		else {
+			alert('failed'+this.getStatus());
+		}        
+	},{enableHighAccuracy: true})
+		
+		//window.setInterval(locate, 5000);//定时定位
+	
+	
+	
+	//在地图上标注标点
+	function setMarker(){
+		
+	}
+	
+	//关键字检索部分
+	function G(id) {
+		return document.getElementById(id);
+	}
+	//行驶信息
+	function drivingInfo(){
+		map.clearOverlays();
+		var output = "";
+				var searchComplete = function (results){
+					if (transit.getStatus() != BMAP_STATUS_SUCCESS){
+					return ;
+					}
+					var plan = results.getPlan(0);
+					output += "预计时间：" ;
+					output += plan.getDuration(true) + "\n";                //获取时间
+					output += "预计路程：" ;
+					output += plan.getDistance(true) + "\n";             //获取距离
+					output += "预计车费：" ;
+					output += results.taxiFare.day.totalFare + "元\n";
+				}
+			var transit = new BMap.DrivingRoute(map, {renderOptions: {map: map},
+				onSearchComplete: searchComplete,
+				onMarkersSet:function(routes) {
+            map.removeOverlay(routes[0].marker); //删除起点
+            map.removeOverlay(routes[1].marker);//删除终点
+        },
+				onPolylinesSet: function(){        
+					setTimeout(function(){Qconn.setinfo(output);},"300");
+				}});
+			transit.search(startPos, endPos);
+	}
+	
+function addindex_start(){
+	var ac = new BMap.Autocomplete(    //建立一个自动完成的对象
+		{"input" : startposId
+		,"location" : map
+	});
+
+	ac.addEventListener("onhighlight", function(e) {  //鼠标放在下拉列表上的事件
+	var str = "";
+		var _value = e.fromitem.value;
+		var value = "";
+		if (e.fromitem.index > -1) {
+			value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+		}    
+		str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
+		
+		value = "";
+		if (e.toitem.index > -1) {
+			_value = e.toitem.value;
+			value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+		}    
+		str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
+		G("startResultPanel").innerHTML = str;
+	});
+
+	ac.addEventListener("onconfirm", function(e) {    //鼠标点击下拉列表后的事件
+		var _value = e.item.value;
+			startPosStr = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+			Qconn.setStartPosStr_slot(startPosStr);
+			//alert(startPosStr);
+			G("startResultPanel").innerHTML ="onconfirm<br />index = " + e.item.index + "<br />startPosStr = " + startPosStr;
+			setStartPos();
+	});
+		startPosMk.addEventListener("dragend", function (e) {
+             //var x = e.point.lng; //经度
+             //var y = e.point.lat; //纬度
+             //alert("拖到的地点的经纬度：" + x + "，" + y);
+      var geoc = new BMap.Geocoder();         
+			var pt = e.point;
+			startPos.lng = pt.lng;
+			startPos.lat = pt.lat;
+			Qconn.setStartPos_slot(startPos.lng,startPos.lat);
+			geoc.getLocation(pt, function(rs){
+				var addComp = rs.addressComponents;
+				startPosStr = addComp.province + addComp.city + addComp.district + addComp.street + addComp.streetNumber;
+				Qconn.setStartPosStr_slot(startPosStr);
+				//alert(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);  
+				G("startposId").value = startPosStr;
+      });
+      if (isendPos == 1)
+      	drivingInfo();
+    });
+	function setStartPos(){
+		//map.clearOverlays();    //清除地图上所有覆盖物
+		function myFun(){
+			var pp = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
+			startPos.lng = pp.lng;
+			startPos.lat = pp.lat;
+			Qconn.setStartPos_slot(startPos.lng,startPos.lat);
+			startPosMk.setPosition(startPos);
+			//map.addOverlay(new BMap.Marker(pp));    //添加标注
+			if (isendPos == 0)
+				map.centerAndZoom(startPos, 16);
+			else {
+				//map.centerAndZoom(new BMap.Point((startPos.lng+endPos.lng)/2,(startPos.lat+endPos.lat)/2),14);
+				drivingInfo();
+			}
+		}
+		var local = new BMap.LocalSearch(map, { //智能搜索
+		  onSearchComplete: myFun
+		});
+		local.search(startPosStr);
+	}
+}
+function addindex_end(){
+	var ac = new BMap.Autocomplete(    //建立一个自动完成的对象
+		{"input" : endposId
+		,"location" : map
+	});
+
+	ac.addEventListener("onhighlight", function(e) {  //鼠标放在下拉列表上的事件
+	var str = "";
+		var _value = e.fromitem.value;
+		var value = "";
+		if (e.fromitem.index > -1) {
+			value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+		}    
+		str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
+		
+		value = "";
+		if (e.toitem.index > -1) {
+			_value = e.toitem.value;
+			value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+		}    
+		str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
+		G("endResultPanel").innerHTML = str;
+	});
+
+	ac.addEventListener("onconfirm", function(e) {    //鼠标点击下拉列表后的事件
+		var _value = e.item.value;
+			endPosStr = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+			Qconn.setEndPosStr_slot(endPosStr);//将当前终点位置信息传给QT
+			//alert(endPosStr);
+			G("endResultPanel").innerHTML ="onconfirm<br />index = " + e.item.index + "<br />endPosStr = " + endPosStr;
+			setEndPos();
+	});
+	function setEndPos(){
+		//map.clearOverlays();    //清除地图上所有覆盖物
+		function myFun(){
+			var pp = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
+			endPos.lng = pp.lng;
+			endPos.lat = pp.lat;
+			//map.centerAndZoom(pp, 18);
+			if (isendPos == 0){
+				isendPos = 1;
+				endPosMk.setPosition(endPos);
+				map.addOverlay(endPosMk);    //添加标注
+			}
+			else{
+				endPosMk.setPosition(endPos);
+			}
+			//map.centerAndZoom(new BMap.Point((startPos.lng+endPos.lng)/2,(startPos.lat+endPos.lat)/2),14);//设置中心点
+			drivingInfo();
+		}
+			var local = new BMap.LocalSearch(map, { //智能搜索
+		  onSearchComplete: myFun
+		});
+		local.search(endPosStr);
+	}
+}
+//定位函数，返回坐标点
+function locate(){
+	var geolocation = new BMap.Geolocation();
+	geolocation.getCurrentPosition(function(r){
+		if(this.getStatus() == BMAP_STATUS_SUCCESS){
+			myPos.lng = r.point.lng;
+			myPos.lat = r.point.lat;
+			Qconn.setCurPos_slot(myPos.lng,myPos.lat);
+			myPosMk.setPosition(myPos);
+			//alert('您的位置：'+r.point.lng+','+r.point.lat);
+		}
+		else {
+			alert('failed'+this.getStatus());
+		}        
+	},{enableHighAccuracy: true})
+}
+function geoinfo(){
+	map.centerAndZoom(myPos,15);
+	var info = "";
+	info = "当前位置：\n" + "经度：" + myPos.lng + "\n纬度：" + myPos.lat;
+	//alert("geoinfo");
+	Qconn.setinfo(info);
+}
+function addcar(lng,lat){
+	var i = 0;
+	var p = new BMap.Point(lng, lat);
+	while (cars[i]) {
+		 i++;
+		 if (i == 10) break;
+	}
+	if (i < 10){
+		cars[i] = new BMap.Marker(p, {icon:curIcon});
+		map.addOverlay(cars[i]);
+		//map.centerAndZoom(p,15);
+	}
+	//alert("addcar");
+}
+function removecars(){
+	var i = 0;
+	while (cars[i]) {
+		map.removeOverlay(cars[i]);
+		cars[i] = null;
+		i++;
+		if (i == 10) break;
+	}
+	//alert("removecar");
+}
+
+window.onload=function(){
+   new QWebChannel(qt.webChannelTransport, function(channel) {
+   Qconn = channel.objects.QtConn;
+   Qconn.getpos.connect(function (){locate();});
+   Qconn.geoinfo.connect(function (){geoinfo();});
+   Qconn.addcar.connect(function (lng,lat){addcar(lng,lat);});
+   Qconn.removecars.connect(function (){removecars();});
+   }); 
+}
+		
+
+
+	//关于状态码
+	//BMAP_STATUS_SUCCESS	检索成功。对应数值“0”。
+	//BMAP_STATUS_CITY_LIST	城市列表。对应数值“1”。
+	//BMAP_STATUS_UNKNOWN_LOCATION	位置结果未知。对应数值“2”。
+	//BMAP_STATUS_UNKNOWN_ROUTE	导航结果未知。对应数值“3”。
+	//BMAP_STATUS_INVALID_KEY	非法密钥。对应数值“4”。
+	//BMAP_STATUS_INVALID_REQUEST	非法请求。对应数值“5”。
+	//BMAP_STATUS_PERMISSION_DENIED	没有权限。对应数值“6”。(自 1.1 新增)
+	//BMAP_STATUS_SERVICE_UNAVAILABLE	服务不可用。对应数值“7”。(自 1.1 新增)
+	//BMAP_STATUS_TIMEOUT	超时。对应数值“8”。(自 1.1 新增)
+</script>
