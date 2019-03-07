@@ -1,5 +1,6 @@
-ģ�µεδ�������ʵ�ּ�ʱ�г����ܡ�
+模仿滴滴打车软件，实现即时叫车功能。
 
-DDTaxi��Windows�ͻ���
-DDDriver:Windows˾����
-DDServer:Linux��������
+DDTaxi：Windows客户端
+DDDriver:Windows司机端
+DDServer:Linux服务器端
+地图坐标信息存储于redis数据库，用户信息存储于mysql数据库
