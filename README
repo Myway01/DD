@@ -4,3 +4,4 @@ DDTaxi：Windows客户端
 DDDriver:Windows司机端
 DDServer:Linux服务器端
 地图坐标信息存储于redis数据库，用户信息存储于mysql数据库
+使用的地图文件位于客户端和司机端rsc文件夹内
